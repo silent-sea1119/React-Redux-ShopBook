@@ -79,27 +79,31 @@ var _redux = __webpack_require__(8);
 // STEP 3 DEFINE REDUCER
 
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
   switch (action.type) {
-    case "INCREMENT":
-      return state + action.payload;
+    case "POST_BOOK":
+      return state = action.payload;
       break;
+
   }
 };
 
 // STEP 1 CREATE THE store
 var store = (0, _redux.createStore)(reducer);
 store.subscribe(function () {
-  console.log('Current state is ' + store.getState());
+  console.log('Current state is ', store.getState());
 });
 
 // STEP 2 CREATE AND DISPATCH ACTION
 
-store.dispatch({ type: "INCREMENT", payload: 1 });
-store.dispatch({ type: "INCREMENT", payload: 1 });
-store.dispatch({ type: "INCREMENT", payload: 1 });
+store.dispatch({ type: "POST_BOOK", payload: {
+    Title: "les 4 fantastique",
+    Author: "Herge",
+    Category: "Siencfiction",
+    Price: 29.5
+  } });
 
 /***/ }),
 /* 1 */
