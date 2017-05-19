@@ -79,12 +79,15 @@ var _redux = __webpack_require__(8);
 // STEP 3 DEFINE REDUCER
 
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { books: [] };
   var action = arguments[1];
 
   switch (action.type) {
     case "POST_BOOK":
-      return state = action.payload;
+      var books = state.books.concat(action.payload);
+      return { books: books };
+      // using babel preset stage-1 notation we can also write
+      //return {books: [...state.books, ...action.payload]} // wich concat the 2 array on the flight
       break;
 
   }
@@ -94,7 +97,7 @@ var reducer = function reducer() {
 var store = (0, _redux.createStore)(reducer);
 store.subscribe(function () {
   console.log('Current state is ', store.getState());
-  console.log('Current price is ', store.getState()[1].Price);
+  //console.log('Current price is ', store.getState()[1].Price); accesing a value of the object here price
 });
 
 // STEP 2 CREATE AND DISPATCH ACTION
@@ -109,6 +112,14 @@ store.dispatch({ type: "POST_BOOK", payload: [{
     Author: "Brother",
     Category: "Siencfiction",
     Price: 33.5
+  }] });
+
+store.dispatch({ type: "POST_BOOK", payload: [{
+    Title: "Tintin au tibet",
+    Author: "Herge",
+    Category: "Aventure",
+    Price: 24.5
+
   }] });
 
 /***/ }),
