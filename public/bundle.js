@@ -79,7 +79,7 @@ var _redux = __webpack_require__(8);
 // STEP 3 DEFINE REDUCER
 
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   switch (action.type) {
@@ -94,16 +94,22 @@ var reducer = function reducer() {
 var store = (0, _redux.createStore)(reducer);
 store.subscribe(function () {
   console.log('Current state is ', store.getState());
+  console.log('Current price is ', store.getState()[1].Price);
 });
 
 // STEP 2 CREATE AND DISPATCH ACTION
 
-store.dispatch({ type: "POST_BOOK", payload: {
+store.dispatch({ type: "POST_BOOK", payload: [{
     Title: "les 4 fantastique",
     Author: "Herge",
     Category: "Siencfiction",
     Price: 29.5
-  } });
+  }, {
+    Title: "Matrix",
+    Author: "Brother",
+    Category: "Siencfiction",
+    Price: 33.5
+  }] });
 
 /***/ }),
 /* 1 */
