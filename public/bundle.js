@@ -74,6 +74,8 @@
 
 "user strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _redux = __webpack_require__(8);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -86,8 +88,9 @@ var reducer = function reducer() {
 
   switch (action.type) {
     case "POST_BOOK":
-      //using babel preset stage-1 notation we can also write
+      //using babel preset stage-1 spread operator notation we can also write
       return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) }; // wich concat the 2 array on the flight in the object
+
       // Using standard
       // let books = state.books.concat(action.payload);
       // return {books};
@@ -96,12 +99,42 @@ var reducer = function reducer() {
     case "DELETE_BOOK":
       // create a copy of the curent state
       var curentBookToDelete = [].concat(_toConsumableArray(state.books));
+
       // determine in wich index of the books array are the id we want to delete by the methode .findIndex(callbackfn)
       var indexToDelete = curentBookToDelete.findIndex(function (book) {
         return book.id === action.payload.id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
       });
-      // remove the book at the specified index with methode .slice()
+
+      //remove the book at the specified index with methode .slice() with the babel preset stage-1 methode spread operator
       return { books: [].concat(_toConsumableArray(curentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(curentBookToDelete.slice(indexToDelete + 1))) };
+
+      // Using standard javascript
+      // let bookPartA = curentBookToDelete.slice(0,indexToDelete);
+      // let bookPartB = curentBookToDelete.slice(indexToDelete+1);
+      // let books = bookPartA.concat(bookPartB);
+      // return {books};
+      break;
+
+    case "UPDATE_BOOK":
+      // create a copy of the curent state
+      var curentBookToUpdate = [].concat(_toConsumableArray(state.books));
+
+      // determine in wich index of the books array are the id we want to update by the methode .findIndex(callbackfn)
+      var indexToUpdate = curentBookToUpdate.findIndex(function (book) {
+        return book.id === action.payload.id;
+      });
+      // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
+      var objectToUpdate = curentBookToUpdate[indexToUpdate];
+
+      // Then we stock in a new variable using babel preset stage-1 the object to update merge with the key,value we want to update
+      // The key here Title is sensible to the case to be updated, if we write title : action.payload.Title
+      // Another key value title ll be add to the new object (not what we want to do)
+      // Writing Title like the initial object ll force to update this key by the payload value
+      // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
+      var newBookToUpdate = _extends({}, objectToUpdate, { Title: action.payload.Title });
+
+      //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
+      return { books: [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1))) };
       break;
 
       return state;
@@ -132,20 +165,33 @@ store.dispatch({ type: "POST_BOOK", payload: [{
     Author: "Brother",
     Category: "Siencfiction",
     Price: 33.5
+  }, {
+    id: 3,
+    Title: "la belle et la bete",
+    Author: "Disney",
+    Category: "Dessin Anime",
+    Price: 18
   }] });
 
 // Action 2 post book
 store.dispatch({ type: "POST_BOOK", payload: [{
-    id: 3,
+    id: 4,
     Title: "Tintin au tibet",
     Author: "Herge",
     Category: "Aventure",
     Price: 24.5
-
   }] });
 
 // Action 3 delete book
-store.dispatch({ type: "DELETE_BOOK", payload: { id: 1 } });
+store.dispatch({ type: "DELETE_BOOK", payload: { id: 2 } });
+
+// Action 4 update book
+store.dispatch({ type: "UPDATE_BOOK", payload: {
+    id: 1,
+    Title: "Les 4 Fantastiques"
+  }
+
+});
 
 /***/ }),
 /* 1 */
