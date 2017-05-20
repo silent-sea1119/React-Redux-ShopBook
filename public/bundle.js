@@ -74,90 +74,28 @@
 
 "user strict";
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _redux = __webpack_require__(8);
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _index = __webpack_require__(25);
 
-// STEP 3 DEFINE REDUCER
+var _index2 = _interopRequireDefault(_index);
 
-var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { books: [] };
-  var action = arguments[1];
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-  switch (action.type) {
-    case "POST_BOOK":
-      //using babel preset stage-1 spread operator notation we can also write
-      return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) }; // wich concat the 2 array on the flight in the object
+//////////////////////////////
+// STEP 1 CREATE THE STORE //
+////////////////////////////
 
-      // Using standard
-      // let books = state.books.concat(action.payload);
-      // return {books};
-      break;
-
-    case "DELETE_BOOK":
-      // create a copy of the curent state
-      var curentBookToDelete = [].concat(_toConsumableArray(state.books));
-
-      // determine in wich index of the books array are the id we want to delete by the methode .findIndex(callbackfn)
-      var indexToDelete = curentBookToDelete.findIndex(function (book) {
-        return book.id === action.payload.id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
-      });
-
-      //remove the book at the specified index with methode .slice() with the babel preset stage-1 methode spread operator
-      return { books: [].concat(_toConsumableArray(curentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(curentBookToDelete.slice(indexToDelete + 1))) };
-
-      // Using standard javascript
-      // let bookPartA = curentBookToDelete.slice(0,indexToDelete);
-      // let bookPartB = curentBookToDelete.slice(indexToDelete+1);
-      // let books = bookPartA.concat(bookPartB);
-      // return {books};
-      break;
-
-    case "UPDATE_BOOK":
-      // create a copy of the curent state
-      var curentBookToUpdate = [].concat(_toConsumableArray(state.books));
-
-      // determine in wich index of the books array are the id we want to update by the methode .findIndex(callbackfn)
-      var indexToUpdate = curentBookToUpdate.findIndex(function (book) {
-        return book.id === action.payload.id;
-      });
-      // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
-      var objectToUpdate = curentBookToUpdate[indexToUpdate];
-
-      // Then we stock in a new variable using babel preset stage-1 the object to update merge with the key,value we want to update
-      // The key here Title is sensible to the case to be updated, if we write title : action.payload.Title
-      // Another key value title ll be add to the new object (not what we want to do)
-      // Writing Title like the initial object ll force to update this key by the payload value
-      // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
-      var newBookToUpdate = _extends({}, objectToUpdate, { Title: action.payload.Title });
-
-      //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
-      return { books: [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1))) };
-
-      //Using standard javascript
-      // let bookPartA = curentBookToUpdate.slice(0,indexToUpdate);
-      // bookPartA = bookPartA.concat(newBookToUpdate);
-      // let bookPartB = curentBookToUpdate.slice(indexToUpdate+1);
-      // let books = bookPartA.concat(bookPartB);
-      // return {books};
-      break;
-
-      return state;
-
-  }
-};
-
-// STEP 1 CREATE THE STORE
-var store = (0, _redux.createStore)(reducer);
+var store = (0, _redux.createStore)(_index2.default);
 store.subscribe(function () {
   console.log('Current state is ', store.getState());
-  //accessing a value price of the object
-  //console.log('Current price is ', store.getState()[1].Price);
+  //for accessing the value price of the object
+  //store.getState()[1].Price
 });
 
+/////////////////////////////////////
 // STEP 2 CREATE AND DISPATCH ACTION
+////////////////////////////////////
 
 // Action 1 post book
 store.dispatch({ type: "POST_BOOK", payload: [{
@@ -1439,6 +1377,116 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+////////////////////////////
+// STEP 3 DEFINE REDUCER //
+//////////////////////////
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var bookReducers = function bookReducers() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { books: [] };
+  var action = arguments[1];
+
+  switch (action.type) {
+    case "POST_BOOK":
+      //using babel preset stage-1 spread operator notation we can also write
+      return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) }; // wich concat the 2 array on the flight in the object
+
+      // Using standard
+      // let books = state.books.concat(action.payload);
+      // return {books};
+      break;
+
+    case "DELETE_BOOK":
+      // create a copy of the curent state
+      var curentBookToDelete = [].concat(_toConsumableArray(state.books));
+
+      // determine in wich index of the books array are the id we want to delete by the methode .findIndex(callbackfn)
+      var indexToDelete = curentBookToDelete.findIndex(function (book) {
+        return book.id === action.payload.id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
+      });
+      //remove the book at the specified index with methode .slice() with the babel preset stage-1 methode spread operator
+      return { books: [].concat(_toConsumableArray(curentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(curentBookToDelete.slice(indexToDelete + 1))) };
+
+      // Using standard javascript
+      // let bookPartA = curentBookToDelete.slice(0,indexToDelete);
+      // let bookPartB = curentBookToDelete.slice(indexToDelete+1);
+      // let books = bookPartA.concat(bookPartB);
+      // return {books};
+      break;
+
+    case "UPDATE_BOOK":
+      // create a copy of the curent state
+      var curentBookToUpdate = [].concat(_toConsumableArray(state.books));
+
+      // determine in wich index of the books array are the id we want to update by the methode .findIndex(callbackfn)
+      var indexToUpdate = curentBookToUpdate.findIndex(function (book) {
+        return book.id === action.payload.id;
+      });
+      // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
+      var objectToUpdate = curentBookToUpdate[indexToUpdate];
+
+      // Then we stock in a new variable using babel preset stage-1 the object to update merge with the key,value we want to update
+      // The key here Title is sensible to the case to be updated, if we write title : action.payload.Title
+      // Another key value title ll be add to the new object (not what we want to do)
+      // Writing Title like the initial object ll force to update this key by the payload value
+      // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
+      var newBookToUpdate = _extends({}, objectToUpdate, { Title: action.payload.Title });
+
+      //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
+      return { books: [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1))) };
+
+      //Using standard javascript
+      // let bookPartA = curentBookToUpdate.slice(0,indexToUpdate);
+      // bookPartA = bookPartA.concat(newBookToUpdate);
+      // let bookPartB = curentBookToUpdate.slice(indexToUpdate+1);
+      // let books = bookPartA.concat(bookPartB);
+      // return {books};
+      break;
+  }
+  return state;
+};
+
+exports.default = bookReducers;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(8);
+
+var _bookReducers = __webpack_require__(24);
+
+var _bookReducers2 = _interopRequireDefault(_bookReducers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var allReducers = (0, _redux.combineReducers)({
+  books: _bookReducers2.default
+});
+
+exports.default = allReducers;
 
 /***/ })
 /******/ ]);
