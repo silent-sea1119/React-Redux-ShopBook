@@ -1,8 +1,8 @@
 "use strict"
 import {createStore} from 'redux';
 import Reducers from './reducers/index';
-
-
+import addToCart from './actions/cartActions';
+import {postBook, deleteBooks, updateBooks} from './actions/bookActions';
 
 
 //////////////////////////////
@@ -23,7 +23,7 @@ import Reducers from './reducers/index';
 ////////////////////////////////////
 
 // Action 1 post book
-store.dispatch({type:"POST_BOOK", payload: [
+store.dispatch(postBook([
   {
     id: 1,
     Title: "les 4 fantastique",
@@ -44,34 +44,33 @@ store.dispatch({type:"POST_BOOK", payload: [
     Author: "Disney",
     Category: "Dessin Anime",
     Price: 18
-  }
-]})
+  },
+])
+)
 
 
 // Action 2 post book
-store.dispatch({type: "POST_BOOK", payload: [
-  {
-    id: 4,
-    Title: "Tintin au tibet",
-    Author: "Herge",
-    Category: "Aventure",
-    Price: 24.5
-  }
-]})
+store.dispatch(postBook([{
+  id: 4,
+  Title: "Tintin au tibet",
+  Author: "Herge",
+  Category: "Aventure",
+  Price: 24.5
+  }])
+)
 
 
 // Action 3 delete book
-store.dispatch({type: "DELETE_BOOK", payload: {id: 2}})
+store.dispatch(deleteBooks({id: 4}))
 
 
 // Action 4 update book
-store.dispatch({type: "UPDATE_BOOK", payload: {
+store.dispatch(updateBooks({
   id: 1,
   Title: "Les 4 Fantastiques"
-  }
-
-})
+  })
+)
 
 
 // Action Add to Cart
-store.dispatch({type: "ADD_TO_CART", payload: [{id: 2}]})
+store.dispatch(addToCart([{id: 1}]));

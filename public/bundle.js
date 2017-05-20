@@ -79,6 +79,12 @@ var _index = __webpack_require__(25);
 
 var _index2 = _interopRequireDefault(_index);
 
+var _cartActions = __webpack_require__(27);
+
+var _cartActions2 = _interopRequireDefault(_cartActions);
+
+var _bookActions = __webpack_require__(28);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //////////////////////////////
@@ -97,48 +103,46 @@ store.subscribe(function () {
 ////////////////////////////////////
 
 // Action 1 post book
-store.dispatch({ type: "POST_BOOK", payload: [{
-    id: 1,
-    Title: "les 4 fantastique",
-    Author: "Herge",
-    Category: "Siencfiction",
-    Price: 29.5
-  }, {
-    id: 2,
-    Title: "Matrix",
-    Author: "Brother",
-    Category: "Siencfiction",
-    Price: 33.5
-  }, {
-    id: 3,
-    Title: "la belle et la bete",
-    Author: "Disney",
-    Category: "Dessin Anime",
-    Price: 18
-  }] });
+store.dispatch((0, _bookActions.postBook)([{
+  id: 1,
+  Title: "les 4 fantastique",
+  Author: "Herge",
+  Category: "Siencfiction",
+  Price: 29.5
+}, {
+  id: 2,
+  Title: "Matrix",
+  Author: "Brother",
+  Category: "Siencfiction",
+  Price: 33.5
+}, {
+  id: 3,
+  Title: "la belle et la bete",
+  Author: "Disney",
+  Category: "Dessin Anime",
+  Price: 18
+}]));
 
 // Action 2 post book
-store.dispatch({ type: "POST_BOOK", payload: [{
-    id: 4,
-    Title: "Tintin au tibet",
-    Author: "Herge",
-    Category: "Aventure",
-    Price: 24.5
-  }] });
+store.dispatch((0, _bookActions.postBook)([{
+  id: 4,
+  Title: "Tintin au tibet",
+  Author: "Herge",
+  Category: "Aventure",
+  Price: 24.5
+}]));
 
 // Action 3 delete book
-store.dispatch({ type: "DELETE_BOOK", payload: { id: 2 } });
+store.dispatch((0, _bookActions.deleteBooks)({ id: 4 }));
 
 // Action 4 update book
-store.dispatch({ type: "UPDATE_BOOK", payload: {
-    id: 1,
-    Title: "Les 4 Fantastiques"
-  }
-
-});
+store.dispatch((0, _bookActions.updateBooks)({
+  id: 1,
+  Title: "Les 4 Fantastiques"
+}));
 
 // Action Add to Cart
-store.dispatch({ type: "ADD_TO_CART", payload: [{ id: 2 }] });
+store.dispatch((0, _cartActions2.default)([{ id: 1 }]));
 
 /***/ }),
 /* 1 */
@@ -1522,6 +1526,66 @@ var cardReducers = function cardReducers() {
 };
 
 exports.default = cardReducers;
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// add to cart Action creator
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var addToCart = function addToCart(book) {
+  return {
+    type: "ADD_TO_CART",
+    payload: book
+  };
+};
+
+exports.default = addToCart;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// post book action creator
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.postBook = postBook;
+exports.deleteBooks = deleteBooks;
+exports.updateBooks = updateBooks;
+function postBook(book) {
+  return {
+    type: "POST_BOOK",
+    payload: book
+  };
+}
+
+// delete book action creator
+function deleteBooks(id) {
+  return {
+    type: "DELETE_BOOK",
+    payload: id
+  };
+}
+
+// update book action creator
+function updateBooks(book) {
+  return {
+    type: "UPDATE_BOOK",
+    payload: book
+
+  };
+}
 
 /***/ })
 /******/ ]);
