@@ -135,6 +135,13 @@ var reducer = function reducer() {
 
       //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
       return { books: [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1))) };
+
+      //Using standard javascript
+      // let bookPartA = curentBookToUpdate.slice(0,indexToUpdate);
+      // bookPartA = bookPartA.concat(newBookToUpdate);
+      // let bookPartB = curentBookToUpdate.slice(indexToUpdate+1);
+      // let books = bookPartA.concat(bookPartB);
+      // return {books};
       break;
 
       return state;
