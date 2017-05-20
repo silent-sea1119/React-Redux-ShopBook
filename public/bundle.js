@@ -76,6 +76,8 @@
 
 var _redux = __webpack_require__(8);
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 // STEP 3 DEFINE REDUCER
 
 var reducer = function reducer() {
@@ -84,43 +86,66 @@ var reducer = function reducer() {
 
   switch (action.type) {
     case "POST_BOOK":
-      var books = state.books.concat(action.payload);
-      return { books: books };
-      // using babel preset stage-1 notation we can also write
-      //return {books: [...state.books, ...action.payload]} // wich concat the 2 array on the flight
+      //using babel preset stage-1 notation we can also write
+      return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) }; // wich concat the 2 array on the flight in the object
+      // Using standard
+      // let books = state.books.concat(action.payload);
+      // return {books};
       break;
+
+    case "DELETE_BOOK":
+      // create a copy of the curent state
+      var curentBookToDelete = [].concat(_toConsumableArray(state.books));
+      // determine in wich index of the books array are the id we want to delete by the methode .findIndex(callbackfn)
+      var indexToDelete = curentBookToDelete.findIndex(function (book) {
+        return book.id === action.payload.id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
+      });
+      // remove the book at the specified index with methode .slice()
+      return { books: [].concat(_toConsumableArray(curentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(curentBookToDelete.slice(indexToDelete + 1))) };
+      break;
+
+      return state;
 
   }
 };
 
-// STEP 1 CREATE THE store
+// STEP 1 CREATE THE STORE
 var store = (0, _redux.createStore)(reducer);
 store.subscribe(function () {
   console.log('Current state is ', store.getState());
-  //console.log('Current price is ', store.getState()[1].Price); accesing a value of the object here price
+  //accessing a value price of the object
+  //console.log('Current price is ', store.getState()[1].Price);
 });
 
 // STEP 2 CREATE AND DISPATCH ACTION
 
+// Action 1 post book
 store.dispatch({ type: "POST_BOOK", payload: [{
+    id: 1,
     Title: "les 4 fantastique",
     Author: "Herge",
     Category: "Siencfiction",
     Price: 29.5
   }, {
+    id: 2,
     Title: "Matrix",
     Author: "Brother",
     Category: "Siencfiction",
     Price: 33.5
   }] });
 
+// Action 2 post book
 store.dispatch({ type: "POST_BOOK", payload: [{
+    id: 3,
     Title: "Tintin au tibet",
     Author: "Herge",
     Category: "Aventure",
     Price: 24.5
 
   }] });
+
+// Action 3 delete book
+store.dispatch({ type: "DELETE_BOOK", payload: { id: 1 } });
 
 /***/ }),
 /* 1 */
