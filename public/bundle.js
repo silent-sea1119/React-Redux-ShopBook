@@ -72,7 +72,6 @@
 
 "use strict";
 
-"user strict";
 
 var _redux = __webpack_require__(8);
 
@@ -137,6 +136,9 @@ store.dispatch({ type: "UPDATE_BOOK", payload: {
   }
 
 });
+
+// Action Add to Cart
+store.dispatch({ type: "ADD_TO_CART", payload: [{ id: 2 }] });
 
 /***/ }),
 /* 1 */
@@ -1480,13 +1482,46 @@ var _bookReducers = __webpack_require__(24);
 
 var _bookReducers2 = _interopRequireDefault(_bookReducers);
 
+var _cartReducers = __webpack_require__(26);
+
+var _cartReducers2 = _interopRequireDefault(_cartReducers);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var allReducers = (0, _redux.combineReducers)({
-  books: _bookReducers2.default
+  books: _bookReducers2.default,
+  cart: _cartReducers2.default
 });
 
 exports.default = allReducers;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var cardReducers = function cardReducers() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { cart: [] };
+  var action = arguments[1];
+
+  switch (action.type) {
+    case "ADD_TO_CART":
+      return { cart: [].concat(_toConsumableArray(state.cart), _toConsumableArray(action.payload)) };
+      break;
+    default:
+  }
+  return state;
+};
+
+exports.default = cardReducers;
 
 /***/ })
 /******/ ]);

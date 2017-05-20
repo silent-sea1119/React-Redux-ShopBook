@@ -1,4 +1,4 @@
-"user strict"
+"use strict"
 import {createStore} from 'redux';
 import Reducers from './reducers/index';
 
@@ -68,6 +68,10 @@ store.dispatch({type: "DELETE_BOOK", payload: {id: 2}})
 store.dispatch({type: "UPDATE_BOOK", payload: {
   id: 1,
   Title: "Les 4 Fantastiques"
-}
+  }
 
 })
+
+
+// Action Add to Cart
+store.dispatch({type: "ADD_TO_CART", payload: [{id: 2}]})
