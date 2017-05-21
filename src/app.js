@@ -4,9 +4,15 @@ import logger from 'redux-logger';
 import Reducers from './reducers/index';
 import addToCart from './actions/cartActions';
 import {postBook, deleteBooks, updateBooks} from './actions/bookActions';
+import React from 'react';
+import {render} from 'react-dom';
+
+import BookList from './components/pages/booksList';
 
 
-
+render(
+  <BookList />, document.getElementById('app')
+);
 
 //////////////////////////////
 // STEP 1 CREATE THE STORE //
