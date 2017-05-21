@@ -6,13 +6,12 @@ import addToCart from './actions/cartActions';
 import {postBook, deleteBooks, updateBooks} from './actions/bookActions';
 import React from 'react';
 import {render} from 'react-dom';
-
+import {Provider} from 'react-redux';
 import BookList from './components/pages/booksList';
 
 
-render(
-  <BookList />, document.getElementById('app')
-);
+
+
 
 //////////////////////////////
 // STEP 1 CREATE THE STORE //
@@ -26,7 +25,11 @@ render(
  //   //store.getState()[1].Price
  // })
 
-
+ render(
+   <Provider store={store}>
+     <BookList />
+   </Provider>, document.getElementById('app')
+ );
 
 /////////////////////////////////////
 // STEP 2 CREATE AND DISPATCH ACTION
