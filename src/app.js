@@ -1,20 +1,24 @@
 "use strict"
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
+import logger from 'redux-logger';
 import Reducers from './reducers/index';
 import addToCart from './actions/cartActions';
 import {postBook, deleteBooks, updateBooks} from './actions/bookActions';
 
 
+
+
 //////////////////////////////
 // STEP 1 CREATE THE STORE //
 ////////////////////////////
-
- const store = createStore(Reducers);
- store.subscribe(function(){
-   console.log('Current state is ', store.getState());
-   //for accessing the value price of the object
-   //store.getState()[1].Price
- })
+ const middleware = applyMiddleware(logger); // to use logger  middleware (console state improvement) first instal it with this cli npm i --save-dev redux-logger then we import applyMiddleware from 'redux' and logger 'redux-logger' then declare the middleware on this line and add middleware after the reducer in createStore(reducers, middleware);
+ const store = createStore(Reducers, middleware);
+ // we use redux-logger middleware to read the state in the console more efficiently so we get ride of this line:
+ // store.subscribe(function(){
+ //   console.log('Current state is ', store.getState());
+ //   //for accessing the value price of the object
+ //   //store.getState()[1].Price
+ // })
 
 
 
