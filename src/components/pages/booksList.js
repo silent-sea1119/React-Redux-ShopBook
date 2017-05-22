@@ -2,8 +2,14 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {getBooks} from '../../actions/bookActions';
 
 class BooksList extends React.Component{
+  componentDidMount(){
+    // dispatch the action getBooks as soon as the component BookList is loaded
+    this.props.getBooks();
+  }
   render(){
     let listBooks = this.props.books.map(function(book){
       return(
@@ -18,7 +24,7 @@ class BooksList extends React.Component{
 
     return(
       <div>
-        <h1>Hello React </h1>
+      <h1> List of Book </h1>
         {listBooks}
       </div>
     )
@@ -31,4 +37,8 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps) (BooksList);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({getBooks: getBooks}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (BooksList);

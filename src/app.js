@@ -3,7 +3,7 @@ import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
 import Reducers from './reducers/index';
 import addToCart from './actions/cartActions';
-import {postBook, deleteBooks, updateBooks} from './actions/bookActions';
+import {postBook, deleteBook, updateBook} from './actions/bookActions';
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
@@ -36,30 +36,30 @@ import BookList from './components/pages/booksList';
 ////////////////////////////////////
 
 // Action 1 post book
-store.dispatch(postBook([
-  {
-    id: 1,
-    Title: "les 4 fantastique",
-    Author: "Herge",
-    Category: "Siencfiction",
-    Price: 29.5
-  },
-  {
-    id: 2,
-    Title: "Matrix",
-    Author: "Brother",
-    Category: "Siencfiction",
-    Price: 33.5
-  },
-  {
-    id: 3,
-    Title: "la belle et la bete",
-    Author: "Disney",
-    Category: "Dessin Anime",
-    Price: 18
-  },
-])
-)
+// store.dispatch(postBook([
+//   {
+//     id: 1,
+//     Title: "les 4 fantastique",
+//     Author: "Herge",
+//     Category: "Siencfiction",
+//     Price: 29.5
+//   },
+//   {
+//     id: 2,
+//     Title: "Matrix",
+//     Author: "Brother",
+//     Category: "Siencfiction",
+//     Price: 33.5
+//   },
+//   {
+//     id: 3,
+//     Title: "la belle et la bete",
+//     Author: "Disney",
+//     Category: "Dessin Anime",
+//     Price: 18
+//   },
+// ])
+// )
 
 
 // Action 2 post book
@@ -74,11 +74,11 @@ store.dispatch(postBook([{
 
 
 // Action 3 delete book
-store.dispatch(deleteBooks({id: 4}))
+// store.dispatch(deleteBook({id: 4}))
 
 
 // Action 4 update book
-store.dispatch(updateBooks({
+store.dispatch(updateBook({
   id: 1,
   Title: "Les 4 Fantastiques"
   })

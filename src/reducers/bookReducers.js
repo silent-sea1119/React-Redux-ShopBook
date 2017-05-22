@@ -4,8 +4,44 @@
 // STEP 3 DEFINE REDUCER //
 //////////////////////////
 
-const bookReducers = function(state={books:[]}, action){
+const bookReducers = function(state={
+  books:
+  [{
+    id: 1,
+    Title: "les 4 fantastique",
+    Author: "Herge",
+    Category: "Siencfiction",
+    Price: 29.5
+  },
+  {
+    id: 2,
+    Title: "Matrix",
+    Author: "Brother",
+    Category: "Siencfiction",
+    Price: 33.5
+  },
+  {
+    id: 3,
+    Title: "la belle et la bete",
+    Author: "Disney",
+    Category: "Dessin Anime",
+    Price: 18
+  },]
+}, action){
+  
   switch (action.type){
+
+    case "GET_BOOKS":
+    return {...state, books:[...state.books]}
+
+    // Using standard
+    // let books = state.books.concat(action.payload);
+    // return {books};
+    break;
+
+
+
+
     case "POST_BOOK":
     //using babel preset stage-1 spread operator notation we can also write
     return {books: [...state.books, ...action.payload]} // wich concat the 2 array on the flight in the object
@@ -14,6 +50,8 @@ const bookReducers = function(state={books:[]}, action){
     // let books = state.books.concat(action.payload);
     // return {books};
     break;
+
+
 
     case "DELETE_BOOK":
     // create a copy of the curent state
@@ -34,6 +72,7 @@ const bookReducers = function(state={books:[]}, action){
     // let books = bookPartA.concat(bookPartB);
     // return {books};
     break;
+
 
     case "UPDATE_BOOK":
     // create a copy of the curent state
