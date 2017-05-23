@@ -84,6 +84,16 @@ store.dispatch(updateBook({
   })
 )
 
+// Action 5 post book
+store.dispatch(postBook([{
+  id: 5,
+  Title: "Sex and the city",
+  Author: "tf1",
+  Category: "Movie",
+  Price: 24.5
+  }])
+)
+
 
 // Action Add to Cart
 store.dispatch(addToCart([{id: 1}]));

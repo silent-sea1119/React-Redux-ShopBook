@@ -35,7 +35,7 @@ handleSubmit(){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({postBook}, dispatch);
+  return bindActionCreators({postBook: postBook}, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(BookForm);

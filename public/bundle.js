@@ -171,6 +171,15 @@ store.dispatch((0, _bookActions.updateBook)({
   Title: "Les 4 Fantastiques"
 }));
 
+// Action 5 post book
+store.dispatch((0, _bookActions.postBook)([{
+  id: 5,
+  Title: "Sex and the city",
+  Author: "tf1",
+  Category: "Movie",
+  Price: 24.5
+}]));
+
 // Action Add to Cart
 store.dispatch((0, _cartActions2.default)([{ id: 1 }]));
 
