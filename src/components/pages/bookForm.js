@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {postBook} from '../../actions/bookActions'
+import postBook from '../../actions/bookActions';
 
 
 class BookForm extends React.Component{

@@ -15,7 +15,7 @@ class Cart extends React.Component{
 
 
   function renderCart(){
-    
+
     const cartItemList = this.props.cart.map(function(cartItem)){
       return(
         <div>
