@@ -6,6 +6,8 @@ import {bindActionCreators} from 'redux';
 import {getBooks} from '../../actions/bookActions';
 import BookItem from './bookItem';
 import BookForm from './bookForm';
+import Cart from './cart';
+
 
 
 class BooksList extends React.Component{
@@ -17,12 +19,11 @@ class BooksList extends React.Component{
     let listBooks = this.props.books.map(function(book){
       return(
         <div key={book.id}>
-          <BookItem className="bookItem"
+          <BookItem
             id= {book.id}
-            title= {book.Title}
-            author= {book.Author}
-            category= {book.Category}
-            price= {book.Price}
+            title= {book.title}
+            description= {book.description}
+            price= {book.price}
           />
         </div>
       )
@@ -30,9 +31,11 @@ class BooksList extends React.Component{
 
     return(
       <div>
+        <Cart />
         <h1> List of Book </h1>
         {listBooks}
         <BookForm />
+
       </div>
     )
   }

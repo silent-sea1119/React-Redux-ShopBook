@@ -154,11 +154,10 @@ var store = (0, _redux.createStore)(_index2.default, middleware);
 
 // Action 2 post book
 store.dispatch((0, _bookActions.postBook)([{
-  id: 4,
-  Title: "Tintin au tibet",
-  Author: "Herge",
-  Category: "Aventure",
-  Price: 24.5
+  id: 3,
+  title: "Tintin au tibet",
+  description: "description",
+  price: 24.5
 }]));
 
 // Action 3 delete book
@@ -171,17 +170,8 @@ store.dispatch((0, _bookActions.updateBook)({
   Title: "Les 4 Fantastiques"
 }));
 
-// Action 5 post book
-store.dispatch((0, _bookActions.postBook)([{
-  id: 5,
-  Title: "Sex and the city",
-  Author: "tf1",
-  Category: "Movie",
-  Price: 24.5
-}]));
-
 // Action Add to Cart
-store.dispatch((0, _cartActions2.default)([{ id: 1 }]));
+store.dispatch((0, _cartActions2.default)([{ id: 0 }]));
 
 /***/ }),
 /* 1 */
@@ -1446,22 +1436,14 @@ var bookReducers = function bookReducers() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     books: [{
       id: 1,
-      Title: "les 4 fantastique",
-      Author: "Herge",
-      Category: "Siencfiction",
-      Price: 29.5
+      title: "les 4 fantastique",
+      description: "Herge",
+      price: 29.5
     }, {
       id: 2,
-      Title: "Matrix",
-      Author: "Brother",
-      Category: "Siencfiction",
-      Price: 33.5
-    }, {
-      id: 3,
-      Title: "la belle et la bete",
-      Author: "Disney",
-      Category: "Dessin Anime",
-      Price: 18
+      title: "la belle et la bete",
+      description: "Disney",
+      price: 18
     }]
   };
   var action = arguments[1];
@@ -23456,6 +23438,10 @@ var _bookForm = __webpack_require__(231);
 
 var _bookForm2 = _interopRequireDefault(_bookForm);
 
+var _cart = __webpack_require__(233);
+
+var _cart2 = _interopRequireDefault(_cart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23486,12 +23472,11 @@ var BooksList = function (_React$Component) {
         return _react2.default.createElement(
           'div',
           { key: book.id },
-          _react2.default.createElement(_bookItem2.default, { className: 'bookItem',
+          _react2.default.createElement(_bookItem2.default, {
             id: book.id,
-            title: book.Title,
-            author: book.Author,
-            category: book.Category,
-            price: book.Price
+            title: book.title,
+            description: book.description,
+            price: book.price
           })
         );
       });
@@ -23499,6 +23484,7 @@ var BooksList = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(_cart2.default, null),
         _react2.default.createElement(
           'h1',
           null,
@@ -24829,11 +24815,11 @@ var BookItem = function (_React$Component) {
   _createClass(BookItem, [{
     key: 'handleAddToCart',
     value: function handleAddToCart() {
+      // merging the actual state with the new object and the this.props.xxx are accesible because of the cascading from bookList.js
       var cartData = [].concat(_toConsumableArray(this.props.cart), [{
         id: this.props.id,
         title: this.props.title,
-        author: this.props.author,
-        category: this.props.category,
+        description: this.props.description,
         price: this.props.price
       }]);
 
@@ -24854,12 +24840,7 @@ var BookItem = function (_React$Component) {
         _react2.default.createElement(
           'h5',
           null,
-          this.props.author
-        ),
-        _react2.default.createElement(
-          'h4',
-          null,
-          this.props.category
+          this.props.description
         ),
         _react2.default.createElement(
           'h3',
@@ -24935,10 +24916,9 @@ var BookForm = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit() {
       var book = [{
-        Title: this.refs.Title.value,
-        Author: this.refs.Author.value,
-        Category: this.refs.Category.value,
-        Price: this.refs.Price.value
+        title: this.refs.title.value,
+        description: this.refs.description.value,
+        price: this.refs.price.value
       }];
 
       this.props.postBook(book);
@@ -24956,25 +24936,19 @@ var BookForm = function (_React$Component) {
             'p',
             null,
             'Title  ',
-            _react2.default.createElement('input', { type: 'text', name: 'Title', ref: 'Title' })
+            _react2.default.createElement('input', { type: 'text', name: 'title', ref: 'title' })
           ),
           _react2.default.createElement(
             'p',
             null,
-            'Anthor  ',
-            _react2.default.createElement('input', { type: 'text', name: 'Author', ref: 'Author' })
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            'Category  ',
-            _react2.default.createElement('input', { type: 'text', name: 'Category', ref: 'Category' })
+            'Description  ',
+            _react2.default.createElement('input', { type: 'text', name: 'description', ref: 'description' })
           ),
           _react2.default.createElement(
             'p',
             null,
             'Price  ',
-            _react2.default.createElement('input', { type: 'text', name: 'Price', ref: 'Price' })
+            _react2.default.createElement('input', { type: 'text', name: 'price', ref: 'price' })
           ),
           _react2.default.createElement(
             'button',
@@ -24994,6 +24968,97 @@ function mapDispatchToProps(dispatch) {
 }
 
 exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(BookForm);
+
+/***/ }),
+/* 232 */,
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(110);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(217);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cart = function (_React$Component) {
+  _inherits(Cart, _React$Component);
+
+  function Cart() {
+    _classCallCheck(this, Cart);
+
+    return _possibleConstructorReturn(this, (Cart.__proto__ || Object.getPrototypeOf(Cart)).apply(this, arguments));
+  }
+
+  _createClass(Cart, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.cart[0]) {
+        return this.renderCart();
+      } else {
+        return this.renderEmptyCart();
+      }
+    }
+  }, {
+    key: 'renderCart',
+    value: function renderCart() {
+
+      var cartItemList = this.props.cart.map(function (cartItem) {
+        return _react2.default.createElement(
+          'div',
+          { key: cartItem.id },
+          _react2.default.createElement(
+            'h6',
+            null,
+            cartItem.title
+          ),
+          _react2.default.createElement(
+            'h6',
+            null,
+            cartItem.price
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        cartItemList
+      );
+    }
+  }, {
+    key: 'renderEmptyCart',
+    value: function renderEmptyCart() {
+      return _react2.default.createElement('div', null);
+    }
+  }]);
+
+  return Cart;
+}(_react2.default.Component);
+
+function mapStateToProps(state) {
+  return {
+    cart: state.cart.cart
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Cart);
 
 /***/ })
 /******/ ]);

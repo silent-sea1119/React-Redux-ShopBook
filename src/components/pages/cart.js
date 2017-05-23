@@ -7,23 +7,23 @@ class Cart extends React.Component{
 
   render(){
     if (this.props.cart[0]){
-      return this.renderCart();
+      return this.renderCart()
     } else {
-      return this.renderEmptyCart();
+      return this.renderEmptyCart()
     }
   }
 
 
-  function renderCart(){
+  renderCart(){
 
-    const cartItemList = this.props.cart.map(function(cartItem)){
+    let cartItemList = this.props.cart.map(function(cartItem){
       return(
-        <div>
-          <h6>{cartItem.id}</h6>
-          <h6>{cartItem.title}<h6>
+        <div key={cartItem.id}>
+          <h6>{cartItem.title}</h6>
+          <h6>{cartItem.price}</h6>
         </div>
       )
-    }
+    })
 
     return (
       <div>
@@ -33,7 +33,7 @@ class Cart extends React.Component{
   }
 
 
-  function renderEmptyCart(){
+  renderEmptyCart(){
     return (<div></div>)
   }
 
@@ -42,7 +42,9 @@ class Cart extends React.Component{
 
 
 function mapStateToProps(state){
-  cart: state.cart.cart
+  return {
+    cart: state.cart.cart
+  }
 }
 
 export default connect(mapStateToProps)(Cart);

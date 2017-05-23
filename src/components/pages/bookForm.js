@@ -9,11 +9,10 @@ import postBook from '../../actions/bookActions';
 class BookForm extends React.Component{
 
 handleSubmit(){
-  const book = [{
-    Title: this.refs.Title.value,
-    Author: this.refs.Author.value,
-    Category: this.refs.Category.value,
-    Price: this.refs.Price.value,
+  let book = [{
+    title: this.refs.title.value,
+    description: this.refs.description.value,
+    price: this.refs.price.value,
   }]
 
   this.props.postBook(book);
@@ -23,10 +22,9 @@ handleSubmit(){
     return(
       <div>
         <form>
-          <p>Title  <input type="text" name="Title" ref="Title"></input></p>
-          <p>Anthor  <input type="text" name="Author" ref="Author"></input></p>
-          <p>Category  <input type="text" name="Category" ref="Category"></input></p>
-          <p>Price  <input type="text" name="Price" ref="Price"></input></p>
+          <p>Title  <input type="text" name="title" ref="title"></input></p>
+          <p>Description  <input type="text" name="description" ref="description"></input></p>
+          <p>Price  <input type="text" name="price" ref="price"></input></p>
           <button type="Submit" value="Submit" onClick={this.handleSubmit.bind(this)}>Save</button>
         </form>
       </div>
@@ -35,7 +33,7 @@ handleSubmit(){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({postBook: postBook}, dispatch);
+  return bindActionCreators({postBook}, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(BookForm);

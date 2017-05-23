@@ -8,27 +8,18 @@ const bookReducers = function(state={
   books:
   [{
     id: 1,
-    Title: "les 4 fantastique",
-    Author: "Herge",
-    Category: "Siencfiction",
-    Price: 29.5
+    title: "les 4 fantastique",
+    description: "Herge",
+    price: 29.5
   },
   {
     id: 2,
-    Title: "Matrix",
-    Author: "Brother",
-    Category: "Siencfiction",
-    Price: 33.5
-  },
-  {
-    id: 3,
-    Title: "la belle et la bete",
-    Author: "Disney",
-    Category: "Dessin Anime",
-    Price: 18
+    title: "la belle et la bete",
+    description: "Disney",
+    price: 18
   },]
 }, action){
-  
+
   switch (action.type){
 
     case "GET_BOOKS":

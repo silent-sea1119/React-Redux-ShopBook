@@ -1,4 +1,5 @@
 "use strict"
+
 import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
 import Reducers from './reducers/index';
@@ -64,11 +65,10 @@ import BookList from './components/pages/booksList';
 
 // Action 2 post book
 store.dispatch(postBook([{
-  id: 4,
-  Title: "Tintin au tibet",
-  Author: "Herge",
-  Category: "Aventure",
-  Price: 24.5
+  id: 3,
+  title: "Tintin au tibet",
+  description: "description",
+  price: 24.5
   }])
 )
 
@@ -84,16 +84,7 @@ store.dispatch(updateBook({
   })
 )
 
-// Action 5 post book
-store.dispatch(postBook([{
-  id: 5,
-  Title: "Sex and the city",
-  Author: "tf1",
-  Category: "Movie",
-  Price: 24.5
-  }])
-)
 
 
 // Action Add to Cart
-store.dispatch(addToCart([{id: 1}]));
+store.dispatch(addToCart([{id: 0}]));
