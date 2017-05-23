@@ -23443,6 +23443,10 @@ var _bookItem = __webpack_require__(230);
 
 var _bookItem2 = _interopRequireDefault(_bookItem);
 
+var _bookForm = __webpack_require__(231);
+
+var _bookForm2 = _interopRequireDefault(_bookForm);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23450,6 +23454,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//import styles from './index.css';
 
 var BooksList = function (_React$Component) {
   _inherits(BooksList, _React$Component);
@@ -23473,16 +23479,12 @@ var BooksList = function (_React$Component) {
         return _react2.default.createElement(
           'div',
           { key: book.id },
-          _react2.default.createElement(_bookItem2.default, {
+          _react2.default.createElement(_bookItem2.default, { className: 'bookItem',
             id: book.id,
             title: book.Title,
             author: book.Author,
             category: book.Category,
             price: book.Price
-            // <h2>{book.Title}</h2>
-            // <h3>{book.Author}</h3>
-            // <p>{book.Category}</p>
-            // <h2>{book.Price}</h2>
           })
         );
       });
@@ -23495,7 +23497,13 @@ var BooksList = function (_React$Component) {
           null,
           ' List of Book '
         ),
-        listBooks
+        listBooks,
+        _react2.default.createElement(
+          'h1',
+          null,
+          ' Submit of Book '
+        ),
+        _react2.default.createElement(_bookForm2.default, null)
       );
     }
   }]);
@@ -24840,6 +24848,110 @@ var BookItem = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = BookItem;
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(110);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(217);
+
+var _redux = __webpack_require__(8);
+
+var _bookActions = __webpack_require__(28);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BookForm = function (_React$Component) {
+  _inherits(BookForm, _React$Component);
+
+  function BookForm() {
+    _classCallCheck(this, BookForm);
+
+    return _possibleConstructorReturn(this, (BookForm.__proto__ || Object.getPrototypeOf(BookForm)).apply(this, arguments));
+  }
+
+  _createClass(BookForm, [{
+    key: 'handleSubmit',
+    value: function handleSubmit() {
+      var book = [{
+        Title: this.refs.Title.value,
+        Author: this.refs.Author.value,
+        Category: this.refs.Category.value,
+        Price: this.refs.Price.value
+      }];
+
+      this.props.postBook(book);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          null,
+          _react2.default.createElement(
+            'p',
+            null,
+            'Title  ',
+            _react2.default.createElement('input', { type: 'text', name: 'Title', ref: 'Title' })
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Anthor  ',
+            _react2.default.createElement('input', { type: 'text', name: 'Author', ref: 'Author' })
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Category  ',
+            _react2.default.createElement('input', { type: 'text', name: 'Category', ref: 'Category' })
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Price  ',
+            _react2.default.createElement('input', { type: 'text', name: 'Price', ref: 'Price' })
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'Submit', value: 'Submit', onClick: this.handleSubmit.bind(this) },
+            'Save'
+          )
+        )
+      );
+    }
+  }]);
+
+  return BookForm;
+}(_react2.default.Component);
+
+function mapDispatchToProps(dispatch) {
+  return (0, _redux.bindActionCreators)({ postBook: _bookActions.postBook }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(BookForm);
 
 /***/ })
 /******/ ]);

@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getBooks} from '../../actions/bookActions';
 import BookItem from './bookItem';
+import BookForm from './bookForm';
+//import styles from './index.css';
 
 class BooksList extends React.Component{
   componentDidMount(){
@@ -15,16 +17,12 @@ class BooksList extends React.Component{
     let listBooks = this.props.books.map(function(book){
       return(
         <div key={book.id}>
-        <BookItem
-          id= {book.id}
-          title= {book.Title}
-          author= {book.Author}
-          category= {book.Category}
-          price= {book.Price}
-          // <h2>{book.Title}</h2>
-          // <h3>{book.Author}</h3>
-          // <p>{book.Category}</p>
-          // <h2>{book.Price}</h2>
+          <BookItem className="bookItem"
+            id= {book.id}
+            title= {book.Title}
+            author= {book.Author}
+            category= {book.Category}
+            price= {book.Price}
           />
         </div>
       )
@@ -32,8 +30,10 @@ class BooksList extends React.Component{
 
     return(
       <div>
-      <h1> List of Book </h1>
+        <h1> List of Book </h1>
         {listBooks}
+        <h1> Submit of Book </h1>
+        <BookForm />
       </div>
     )
   }
