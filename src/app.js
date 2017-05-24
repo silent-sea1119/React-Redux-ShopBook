@@ -65,7 +65,7 @@ import BookList from './components/pages/booksList';
 
 // Action 2 post book
 store.dispatch(postBook([{
-  id: 3,
+  _id: 3,
   title: "tintin au tibet",
   description: "description",
   price: 24.5
@@ -79,7 +79,7 @@ store.dispatch(postBook([{
 
 // Action 4 update book
 store.dispatch(updateBook({
-  id: 1,
+  _id: 1,
   title: "Les 4 Fantastiques"
   })
 )
@@ -87,4 +87,4 @@ store.dispatch(updateBook({
 
 
 // Action Add to Cart
-store.dispatch(addToCart([{id: 0}]));
+//store.dispatch(addToCart([{id: 0}]));

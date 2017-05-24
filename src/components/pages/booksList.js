@@ -15,13 +15,13 @@ class BooksList extends React.Component{
     // dispatch the action getBooks as soon as the component BookList is loaded
     this.props.getBooks(
       [{
-        id: 1,
+        _id: 1,
         title: "les 4 fantastique",
         description: "Herge",
         price: 29.5
       },
       {
-        id: 2,
+        _id: 2,
         title: "la belle et la bete",
         description: "Disney",
         price: 18
@@ -32,9 +32,9 @@ class BooksList extends React.Component{
   render(){
     let booksList = this.props.books.map(function(booksArr){
       return(
-        <div key={booksArr.id}>
+        <div key={booksArr._id}>
           <BookItem
-            id= {booksArr.id}
+            _id= {booksArr._id}
             title= {booksArr.title}
             description= {booksArr.description}
             price= {booksArr.price}

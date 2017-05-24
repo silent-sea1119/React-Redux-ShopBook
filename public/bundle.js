@@ -154,7 +154,7 @@ var store = (0, _redux.createStore)(_index2.default, middleware);
 
 // Action 2 post book
 store.dispatch((0, _bookActions.postBook)([{
-  id: 3,
+  _id: 3,
   title: "tintin au tibet",
   description: "description",
   price: 24.5
@@ -166,12 +166,12 @@ store.dispatch((0, _bookActions.postBook)([{
 
 // Action 4 update book
 store.dispatch((0, _bookActions.updateBook)({
-  id: 1,
+  _id: 1,
   title: "Les 4 Fantastiques"
 }));
 
 // Action Add to Cart
-store.dispatch((0, _cartActions2.default)([{ id: 0 }]));
+//store.dispatch(addToCart([{id: 0}]));
 
 /***/ }),
 /* 1 */
@@ -1462,7 +1462,7 @@ var bookReducers = function bookReducers() {
 
       // determine in wich index of the books array are the id we want to delete by the methode .findIndex(callbackfn)
       var indexToDelete = curentBookToDelete.findIndex(function (book) {
-        return book.id === action.payload.id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
+        return book._id === action.payload._id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
       });
       //remove the book at the specified index with methode .slice() with the babel preset stage-1 methode spread operator
       return { books: [].concat(_toConsumableArray(curentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(curentBookToDelete.slice(indexToDelete + 1))) };
@@ -1480,7 +1480,7 @@ var bookReducers = function bookReducers() {
 
       // determine in wich index of the books array are the id we want to update by the methode .findIndex(callbackfn)
       var indexToUpdate = curentBookToUpdate.findIndex(function (book) {
-        return book.id === action.payload.id;
+        return book._id === action.payload._id;
       });
       // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
       var objectToUpdate = curentBookToUpdate[indexToUpdate];
@@ -23456,12 +23456,12 @@ var BooksList = function (_React$Component) {
     value: function componentDidMount() {
       // dispatch the action getBooks as soon as the component BookList is loaded
       this.props.getBooks([{
-        id: 1,
+        _id: 1,
         title: "les 4 fantastique",
         description: "Herge",
         price: 29.5
       }, {
-        id: 2,
+        _id: 2,
         title: "la belle et la bete",
         description: "Disney",
         price: 18
@@ -23473,9 +23473,9 @@ var BooksList = function (_React$Component) {
       var booksList = this.props.books.map(function (booksArr) {
         return _react2.default.createElement(
           'div',
-          { key: booksArr.id },
+          { key: booksArr._id },
           _react2.default.createElement(_bookItem2.default, {
-            id: booksArr.id,
+            _id: booksArr._id,
             title: booksArr.title,
             description: booksArr.description,
             price: booksArr.price
@@ -24819,7 +24819,7 @@ var BookItem = function (_React$Component) {
     value: function handleCart() {
       // merging the actual state with the new object and the this.props.xxx are accesible because of the cascading from bookList.js
       var book = [].concat(_toConsumableArray(this.props.cart), [{
-        id: this.props.id,
+        _id: this.props._id,
         title: this.props.title,
         description: this.props.description,
         price: this.props.price
@@ -25022,16 +25022,37 @@ var Cart = function (_React$Component) {
       var cartItemList = this.props.cart.map(function (cartItem) {
         return _react2.default.createElement(
           'div',
-          { key: cartItem.id },
+          { key: cartItem._id },
           _react2.default.createElement(
-            'h6',
+            'h4',
             null,
             cartItem.title
           ),
           _react2.default.createElement(
-            'h6',
+            'h5',
             null,
+            'CHF. -   ',
             cartItem.price
+          ),
+          _react2.default.createElement(
+            'h5',
+            null,
+            'QTY '
+          ),
+          _react2.default.createElement(
+            'button',
+            null,
+            '+'
+          ),
+          _react2.default.createElement(
+            'button',
+            null,
+            '-'
+          ),
+          _react2.default.createElement(
+            'button',
+            null,
+            ' Delete '
           )
         );
       });
@@ -25039,6 +25060,11 @@ var Cart = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(
+          'h3',
+          null,
+          ' Shoping Cart '
+        ),
         cartItemList
       );
     }

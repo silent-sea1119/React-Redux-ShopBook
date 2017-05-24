@@ -11,7 +11,7 @@ class BookItem extends React.Component{
   handleCart(){
     // merging the actual state with the new object and the this.props.xxx are accesible because of the cascading from bookList.js
     const book = [...this.props.cart, {
-      id: this.props.id,
+      _id: this.props._id,
       title: this.props.title,
       description: this.props.description,
       price: this.props.price,

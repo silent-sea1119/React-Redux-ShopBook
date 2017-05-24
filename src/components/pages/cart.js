@@ -18,15 +18,20 @@ class Cart extends React.Component{
 
     let cartItemList = this.props.cart.map(function(cartItem){
       return(
-        <div key={cartItem.id}>
-          <h6>{cartItem.title}</h6>
-          <h6>{cartItem.price}</h6>
+        <div key={cartItem._id}>
+          <h4>{cartItem.title}</h4>
+          <h5>CHF. -   {cartItem.price}</h5>
+          <h5>QTY </h5>
+          <button>+</button>
+          <button>-</button>
+          <button> Delete </button>
         </div>
       )
     })
 
     return (
       <div>
+      <h3> Shoping Cart </h3>
         {cartItemList}
       </div>
     )
