@@ -4,26 +4,12 @@
 // STEP 3 DEFINE REDUCER //
 //////////////////////////
 
-const bookReducers = function(state={
-  books:
-  [{
-    id: 1,
-    title: "les 4 fantastique",
-    description: "Herge",
-    price: 29.5
-  },
-  {
-    id: 2,
-    title: "la belle et la bete",
-    description: "Disney",
-    price: 18
-  },]
-}, action){
+const bookReducers = function(state={books:[]}, action){
 
   switch (action.type){
 
     case "GET_BOOKS":
-    return {...state, books:[...state.books]}
+    return {...state, books:[...action.payload]}
 
     // Using standard
     // let books = state.books.concat(action.payload);
@@ -82,7 +68,7 @@ const bookReducers = function(state={
     // Another key value title ll be add to the new object (not what we want to do)
     // Writing Title like the initial object ll force to update this key by the payload value
     // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
-    const newBookToUpdate = {...objectToUpdate, Title: action.payload.Title}
+    const newBookToUpdate = {...objectToUpdate, title: action.payload.title}
 
     //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
     return {books: [...curentBookToUpdate.slice(0,indexToUpdate), newBookToUpdate, ...curentBookToUpdate.slice(indexToUpdate+1)]}
@@ -94,8 +80,9 @@ const bookReducers = function(state={
     // let books = bookPartA.concat(bookPartB);
     // return {books};
     break;
+    default:
   }
   return state;
-};
+}
 
 export default bookReducers;

@@ -8,9 +8,9 @@ import addToCart from '../../actions/cartActions';
 
 class BookItem extends React.Component{
 
-  handleAddToCart(){
+  handleCart(){
     // merging the actual state with the new object and the this.props.xxx are accesible because of the cascading from bookList.js
-    const cartData = [...this.props.cart, {
+    const book = [...this.props.cart, {
       id: this.props.id,
       title: this.props.title,
       description: this.props.description,
@@ -18,7 +18,7 @@ class BookItem extends React.Component{
     }]
 
   // dispatch the action
-   this.props.addToCart(cartData);
+   this.props.addToCart(book);
    }
 
   render(){
@@ -27,7 +27,7 @@ class BookItem extends React.Component{
         <h2>{this.props.title}</h2>
         <h5>{this.props.description}</h5>
         <h3>{this.props.price}</h3>
-        <button onClick={this.handleAddToCart.bind(this)}> add to Cart </button>
+        <button onClick={this.handleCart.bind(this)}> add to Cart </button>
       </div>
 
     );

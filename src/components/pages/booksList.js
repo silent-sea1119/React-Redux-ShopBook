@@ -13,17 +13,31 @@ import Cart from './cart';
 class BooksList extends React.Component{
   componentDidMount(){
     // dispatch the action getBooks as soon as the component BookList is loaded
-    this.props.getBooks();
+    this.props.getBooks(
+      [{
+        id: 1,
+        title: "les 4 fantastique",
+        description: "Herge",
+        price: 29.5
+      },
+      {
+        id: 2,
+        title: "la belle et la bete",
+        description: "Disney",
+        price: 18
+      },]
+    );
   }
+
   render(){
-    let listBooks = this.props.books.map(function(book){
+    let booksList = this.props.books.map(function(booksArr){
       return(
-        <div key={book.id}>
+        <div key={booksArr.id}>
           <BookItem
-            id= {book.id}
-            title= {book.title}
-            description= {book.description}
-            price= {book.price}
+            id= {booksArr.id}
+            title= {booksArr.title}
+            description= {booksArr.description}
+            price= {booksArr.price}
           />
         </div>
       )
@@ -33,7 +47,7 @@ class BooksList extends React.Component{
       <div>
         <Cart />
         <h1> List of Book </h1>
-        {listBooks}
+        {booksList}
         <BookForm />
 
       </div>

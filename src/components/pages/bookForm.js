@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import postBook from '../../actions/bookActions';
+import {postBook} from '../../actions/bookActions';
 
 
 class BookForm extends React.Component{
@@ -25,8 +25,8 @@ handleSubmit(){
           <p>Title  <input type="text" name="title" ref="title"></input></p>
           <p>Description  <input type="text" name="description" ref="description"></input></p>
           <p>Price  <input type="text" name="price" ref="price"></input></p>
-          <button type="Submit" value="Submit" onClick={this.handleSubmit.bind(this)}>Save</button>
         </form>
+        <button onClick={this.handleSubmit.bind(this)}>Save</button>
       </div>
     )
   }

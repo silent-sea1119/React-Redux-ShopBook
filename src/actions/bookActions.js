@@ -1,17 +1,20 @@
 "use strict"
 
 // get book action creator
-export function getBooks(){
+export function getBooks(book){
   return {
     type: "GET_BOOKS",
+    payload: book
   }
 }
 
 // post book action creator
 export function postBook(book){
+  console.log(book);
   return {
     type: "POST_BOOK",
     payload: book
+
   }
 }
 

@@ -155,7 +155,7 @@ var store = (0, _redux.createStore)(_index2.default, middleware);
 // Action 2 post book
 store.dispatch((0, _bookActions.postBook)([{
   id: 3,
-  title: "Tintin au tibet",
+  title: "tintin au tibet",
   description: "description",
   price: 24.5
 }]));
@@ -167,7 +167,7 @@ store.dispatch((0, _bookActions.postBook)([{
 // Action 4 update book
 store.dispatch((0, _bookActions.updateBook)({
   id: 1,
-  Title: "Les 4 Fantastiques"
+  title: "Les 4 Fantastiques"
 }));
 
 // Action Add to Cart
@@ -1433,26 +1433,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var bookReducers = function bookReducers() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    books: [{
-      id: 1,
-      title: "les 4 fantastique",
-      description: "Herge",
-      price: 29.5
-    }, {
-      id: 2,
-      title: "la belle et la bete",
-      description: "Disney",
-      price: 18
-    }]
-  };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { books: [] };
   var action = arguments[1];
 
 
   switch (action.type) {
 
     case "GET_BOOKS":
-      return _extends({}, state, { books: [].concat(_toConsumableArray(state.books)) });
+      return _extends({}, state, { books: [].concat(_toConsumableArray(action.payload)) });
 
       // Using standard
       // let books = state.books.concat(action.payload);
@@ -1502,7 +1490,7 @@ var bookReducers = function bookReducers() {
       // Another key value title ll be add to the new object (not what we want to do)
       // Writing Title like the initial object ll force to update this key by the payload value
       // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
-      var newBookToUpdate = _extends({}, objectToUpdate, { Title: action.payload.Title });
+      var newBookToUpdate = _extends({}, objectToUpdate, { title: action.payload.title });
 
       //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
       return { books: [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1))) };
@@ -1514,6 +1502,7 @@ var bookReducers = function bookReducers() {
       // let books = bookPartA.concat(bookPartB);
       // return {books};
       break;
+    default:
   }
   return state;
 };
@@ -1615,17 +1604,20 @@ exports.getBooks = getBooks;
 exports.postBook = postBook;
 exports.deleteBook = deleteBook;
 exports.updateBook = updateBook;
-function getBooks() {
+function getBooks(book) {
   return {
-    type: "GET_BOOKS"
+    type: "GET_BOOKS",
+    payload: book
   };
 }
 
 // post book action creator
 function postBook(book) {
+  console.log(book);
   return {
     type: "POST_BOOK",
     payload: book
+
   };
 }
 
@@ -23463,20 +23455,30 @@ var BooksList = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // dispatch the action getBooks as soon as the component BookList is loaded
-      this.props.getBooks();
+      this.props.getBooks([{
+        id: 1,
+        title: "les 4 fantastique",
+        description: "Herge",
+        price: 29.5
+      }, {
+        id: 2,
+        title: "la belle et la bete",
+        description: "Disney",
+        price: 18
+      }]);
     }
   }, {
     key: 'render',
     value: function render() {
-      var listBooks = this.props.books.map(function (book) {
+      var booksList = this.props.books.map(function (booksArr) {
         return _react2.default.createElement(
           'div',
-          { key: book.id },
+          { key: booksArr.id },
           _react2.default.createElement(_bookItem2.default, {
-            id: book.id,
-            title: book.title,
-            description: book.description,
-            price: book.price
+            id: booksArr.id,
+            title: booksArr.title,
+            description: booksArr.description,
+            price: booksArr.price
           })
         );
       });
@@ -23490,7 +23492,7 @@ var BooksList = function (_React$Component) {
           null,
           ' List of Book '
         ),
-        listBooks,
+        booksList,
         _react2.default.createElement(_bookForm2.default, null)
       );
     }
@@ -24813,10 +24815,10 @@ var BookItem = function (_React$Component) {
   }
 
   _createClass(BookItem, [{
-    key: 'handleAddToCart',
-    value: function handleAddToCart() {
+    key: 'handleCart',
+    value: function handleCart() {
       // merging the actual state with the new object and the this.props.xxx are accesible because of the cascading from bookList.js
-      var cartData = [].concat(_toConsumableArray(this.props.cart), [{
+      var book = [].concat(_toConsumableArray(this.props.cart), [{
         id: this.props.id,
         title: this.props.title,
         description: this.props.description,
@@ -24824,7 +24826,7 @@ var BookItem = function (_React$Component) {
       }]);
 
       // dispatch the action
-      this.props.addToCart(cartData);
+      this.props.addToCart(book);
     }
   }, {
     key: 'render',
@@ -24849,7 +24851,7 @@ var BookItem = function (_React$Component) {
         ),
         _react2.default.createElement(
           'button',
-          { onClick: this.handleAddToCart.bind(this) },
+          { onClick: this.handleCart.bind(this) },
           ' add to Cart '
         )
       );
@@ -24892,8 +24894,6 @@ var _reactRedux = __webpack_require__(217);
 var _redux = __webpack_require__(8);
 
 var _bookActions = __webpack_require__(28);
-
-var _bookActions2 = _interopRequireDefault(_bookActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24949,12 +24949,12 @@ var BookForm = function (_React$Component) {
             null,
             'Price  ',
             _react2.default.createElement('input', { type: 'text', name: 'price', ref: 'price' })
-          ),
-          _react2.default.createElement(
-            'button',
-            { type: 'Submit', value: 'Submit', onClick: this.handleSubmit.bind(this) },
-            'Save'
           )
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.handleSubmit.bind(this) },
+          'Save'
         )
       );
     }
@@ -24964,7 +24964,7 @@ var BookForm = function (_React$Component) {
 }(_react2.default.Component);
 
 function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ postBook: _bookActions2.default }, dispatch);
+  return (0, _redux.bindActionCreators)({ postBook: _bookActions.postBook }, dispatch);
 }
 
 exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(BookForm);
