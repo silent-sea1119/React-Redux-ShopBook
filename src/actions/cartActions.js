@@ -1,7 +1,7 @@
 "use strict"
 
-// add to cart Action creator
-let addToCart = function(book){
+// Action creator add to cart
+export function addToCart(book){
   return {
     type: "ADD_TO_CART",
     payload: book
@@ -9,4 +9,11 @@ let addToCart = function(book){
 
 }
 
-export default addToCart;
+
+// Action creator delete cart item
+export function deleteCartItem(cart){
+  return {
+    type: "DELETE_CART_ITEM",
+    payload: cart
+  }
+}

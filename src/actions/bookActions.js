@@ -10,7 +10,6 @@ export function getBooks(book){
 
 // post book action creator
 export function postBook(book){
-  console.log(book);
   return {
     type: "POST_BOOK",
     payload: book
