@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import addToCart from '../../actions/cartActions';
+import {addToCart} from '../../actions/cartActions';
 
 
 class BookItem extends React.Component{

@@ -7,6 +7,7 @@ let cardReducers = function(state={cart:[]}, action){
       break;
 
     case "DELETE_CART_ITEM":
+      console.log("Inside catReducer DELETE_CART_ITEM");
       return {cart:[...state, ...action.payload]}
       break;
   }
