@@ -11595,8 +11595,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(14);
@@ -11631,7 +11629,6 @@ var Cart = function (_React$Component) {
   _createClass(Cart, [{
     key: 'onDelete',
     value: function onDelete(_id) {
-
       // create a copy of the curent state
       var curentBookToDelete = this.props.cart;
 
@@ -11645,27 +11642,16 @@ var Cart = function (_React$Component) {
       this.props.deleteCartItem(cartAfterDelete);
     }
   }, {
-    key: 'onUpdate',
-    value: function onUpdate(_id) {
-      // create a copy of the curent state
-      var curentBookToUpdate = this.props.cart;
-
-      // determine in wich index of the books array are the id we want to update by the methode .findIndex(callbackfn)
-      var indexToUpdate = curentBookToUpdate.findIndex(function (cartItem) {
-        return cartItem._id === cartItem.payload._id;
-      });
-      // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
-      var objectToUpdate = curentBookToUpdate[indexToUpdate];
-
-      // Then we stock in a new variable using babel preset stage-1 the object to update merge with the key,value we want to update
-      // The key here Title is sensible to the case to be updated, if we write title : action.payload.Title
-      // Another key value title ll be add to the new object (not what we want to do)
-      // Writing Title like the initial object ll force to update this key by the payload value
-      // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
-      var newBookToUpdate = _extends({}, objectToUpdate, { title: action.payload.title });
-
-      //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
-      return { books: [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1))) };
+    key: 'onIncrement',
+    value: function onIncrement(_id) {
+      return this.props.updateCart(_id, 1);
+    }
+  }, {
+    key: 'onDecrement',
+    value: function onDecrement(_id, qty) {
+      if (qty > 1) {
+        return this.props.updateCart(_id, -1);
+      } else {}
     }
   }, {
     key: 'render',
@@ -11703,12 +11689,12 @@ var Cart = function (_React$Component) {
           ),
           _react2.default.createElement(
             'button',
-            { onClick: this.onUpdate.bind(this) },
+            { onClick: this.onIncrement.bind(this, cartItem._id) },
             '+'
           ),
           _react2.default.createElement(
             'button',
-            null,
+            { onClick: this.onDecrement.bind(this, cartItem._id, cartItem.quantity) },
             '-'
           ),
           _react2.default.createElement(
