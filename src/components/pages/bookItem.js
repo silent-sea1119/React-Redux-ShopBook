@@ -15,11 +15,35 @@ class BookItem extends React.Component{
       title: this.props.title,
       description: this.props.description,
       price: this.props.price,
+      quantity: 1
     }]
+  ///////////////////////////////////////////////////////
+  // dispatch the action and add the book to the cart //
+  /////////////////////////////////////////////////////
 
-  // dispatch the action
-   this.props.addToCart(book);
-   }
+  // Checking if cart is empty or not by checking the length of the cart array
+
+    if(this.props.cart.lenght > 0){
+      // if the cart is not empty we check if the _id of the book we addToCart is inside the cart array
+      console.log("cart is not empty");
+      let cartIndex = this.props.cart.findIndex(function(cart){
+        cart._id === this.props._id
+      });
+
+      if (cartIndex === -1){
+        // the index is not is the cart Array so we add the book to the cart
+        this.props.addToCart(book);
+      } else {
+        // the index is in the array so we update the quantity
+
+      }
+
+    } else {
+      // cart is empty
+      this.props.addToCart(book);
+    }
+
+  }
 
   render(){
     return(

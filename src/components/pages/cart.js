@@ -3,12 +3,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {deleteCartItem} from '../../actions/cartActions';
+import {deleteCartItem, updateCart} from '../../actions/cartActions';
 
 class Cart extends React.Component{
 
   onDelete(_id){
-    console.log("geting inside ondelete");
 
     // create a copy of the curent state
     let curentBookToDelete = this.props.cart;
@@ -23,6 +22,31 @@ class Cart extends React.Component{
     let cartAfterDelete = [...curentBookToDelete.slice(0, indexToDelete), ...curentBookToDelete.slice(indexToDelete+1)]
 
     this.props.deleteCartItem(cartAfterDelete);
+  }
+
+  onUpdate(_id){
+    // create a copy of the curent state
+    const curentBookToUpdate = this.props.cart;
+
+    // determine in wich index of the books array are the id we want to update by the methode .findIndex(callbackfn)
+    const indexToUpdate = curentBookToUpdate.findIndex(function(cartItem){
+        return cartItem._id === cartItem.payload._id;
+      }
+    )
+    // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
+    const objectToUpdate = curentBookToUpdate[indexToUpdate];
+
+    // Then we stock in a new variable using babel preset stage-1 the object to update merge with the key,value we want to update
+    // The key here Title is sensible to the case to be updated, if we write title : action.payload.Title
+    // Another key value title ll be add to the new object (not what we want to do)
+    // Writing Title like the initial object ll force to update this key by the payload value
+    // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
+    const newBookToUpdate = {...objectToUpdate, title: action.payload.title}
+
+    //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
+    return {books: [...curentBookToUpdate.slice(0,indexToUpdate), newBookToUpdate, ...curentBookToUpdate.slice(indexToUpdate+1)]}
+
+
   }
 
   render(){
@@ -41,8 +65,8 @@ class Cart extends React.Component{
         <div key={cartItem._id}>
           <h4>{cartItem.title}</h4>
           <h5>CHF. -   {cartItem.price}</h5>
-          <h5>QTY </h5>
-          <button>+</button>
+          <h5>QTY {cartItem.quantity}</h5>
+          <button onClick={this.onUpdate.bind(this)}>+</button>
           <button>-</button>
           <button onClick={this.onDelete.bind(this, cartItem._id)}> Delete </button>
         </div>
@@ -74,7 +98,10 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({deleteCartItem: deleteCartItem}, dispatch);
+  return bindActionCreators({
+    deleteCartItem: deleteCartItem,
+    updateCart: updateCart
+  }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -12,9 +12,19 @@ export function addToCart(book){
 
 // Action creator delete cart item
 export function deleteCartItem(cart){
-  console.log("inside action creator deleteCartItem");
   return {
     type: "DELETE_CART_ITEM",
     payload: cart
+  }
+}
+
+
+// Action creator update cart
+export function updateCart(_id, unit){
+  return {
+    type: "UPDATE_CART",
+    _id: _id,
+    unit: unit
+
   }
 }

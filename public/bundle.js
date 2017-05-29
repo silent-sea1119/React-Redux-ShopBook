@@ -4747,6 +4747,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addToCart = addToCart;
 exports.deleteCartItem = deleteCartItem;
+exports.updateCart = updateCart;
 function addToCart(book) {
   return {
     type: "ADD_TO_CART",
@@ -4756,9 +4757,16 @@ function addToCart(book) {
 
 // Action creator delete cart item
 function deleteCartItem(cart) {
-  console.log("inside action creator deleteCartItem");
   return {
     type: "DELETE_CART_ITEM",
+    payload: cart
+  };
+}
+
+// Action creator update cart
+function updateCart(cart) {
+  return {
+    type: "UPDATE_CART",
     payload: cart
   };
 }
@@ -11496,7 +11504,8 @@ var BookItem = function (_React$Component) {
         _id: this.props._id,
         title: this.props.title,
         description: this.props.description,
-        price: this.props.price
+        price: this.props.price,
+        quantity: 1
       }]);
 
       // dispatch the action
@@ -11557,6 +11566,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(14);
@@ -11591,7 +11602,6 @@ var Cart = function (_React$Component) {
   _createClass(Cart, [{
     key: 'onDelete',
     value: function onDelete(_id) {
-      console.log("geting inside ondelete");
 
       // create a copy of the curent state
       var curentBookToDelete = this.props.cart;
@@ -11604,6 +11614,29 @@ var Cart = function (_React$Component) {
       var cartAfterDelete = [].concat(_toConsumableArray(curentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(curentBookToDelete.slice(indexToDelete + 1)));
 
       this.props.deleteCartItem(cartAfterDelete);
+    }
+  }, {
+    key: 'onUpdate',
+    value: function onUpdate(_id) {
+      // create a copy of the curent state
+      var curentBookToUpdate = this.props.cart;
+
+      // determine in wich index of the books array are the id we want to update by the methode .findIndex(callbackfn)
+      var indexToUpdate = curentBookToUpdate.findIndex(function (cartItem) {
+        return cartItem._id === cartItem.payload._id;
+      });
+      // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
+      var objectToUpdate = curentBookToUpdate[indexToUpdate];
+
+      // Then we stock in a new variable using babel preset stage-1 the object to update merge with the key,value we want to update
+      // The key here Title is sensible to the case to be updated, if we write title : action.payload.Title
+      // Another key value title ll be add to the new object (not what we want to do)
+      // Writing Title like the initial object ll force to update this key by the payload value
+      // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
+      var newBookToUpdate = _extends({}, objectToUpdate, { title: action.payload.title });
+
+      //update the book at the specified index with methode .slice() with the babel preset stage-1 spread operator methode and append to it the newBookToUpdate
+      return { books: [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1))) };
     }
   }, {
     key: 'render',
@@ -11636,11 +11669,12 @@ var Cart = function (_React$Component) {
           _react2.default.createElement(
             'h5',
             null,
-            'QTY '
+            'QTY ',
+            cartItem.quantity
           ),
           _react2.default.createElement(
             'button',
-            null,
+            { onClick: this.onUpdate.bind(this) },
             '+'
           ),
           _react2.default.createElement(
@@ -11684,7 +11718,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ deleteCartItem: _cartActions.deleteCartItem }, dispatch);
+  return (0, _redux.bindActionCreators)({
+    deleteCartItem: _cartActions.deleteCartItem,
+    updateCart: _cartActions.updateCart
+  }, dispatch);
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Cart);
@@ -11803,12 +11840,16 @@ var cardReducers = function cardReducers() {
   var action = arguments[1];
 
   switch (action.type) {
+
     case "ADD_TO_CART":
       return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
       break;
 
     case "DELETE_CART_ITEM":
-      console.log("Inside catReducer DELETE_CART_ITEM");
+      return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
+      break;
+
+    case "UPDATE_CART":
       return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
       break;
   }
