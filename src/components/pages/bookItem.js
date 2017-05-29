@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {addToCart} from '../../actions/cartActions';
+import {addToCart, updateCart} from '../../actions/cartActions';
 
 
 class BookItem extends React.Component{
@@ -35,7 +35,7 @@ class BookItem extends React.Component{
         this.props.addToCart(book);
       } else {
         // the index is in the array so we update the quantity
-
+        this.pros.updateCart(_id, 1);
       }
 
     } else {
@@ -64,6 +64,9 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({addToCart: addToCart}, dispatch);
+  return bindActionCreators({
+    addToCart: addToCart,
+    updateCart: updateCart
+  }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BookItem);
