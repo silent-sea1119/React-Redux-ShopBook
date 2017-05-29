@@ -4764,10 +4764,12 @@ function deleteCartItem(cart) {
 }
 
 // Action creator update cart
-function updateCart(cart) {
+function updateCart(_id, unit) {
   return {
     type: "UPDATE_CART",
-    payload: cart
+    _id: _id,
+    unit: unit
+
   };
 }
 
@@ -11508,8 +11510,32 @@ var BookItem = function (_React$Component) {
         quantity: 1
       }]);
 
-      // dispatch the action
-      this.props.addToCart(book);
+      ///////////////////////////////////////////////////////
+      // dispatch the action and add the book to the cart //
+      /////////////////////////////////////////////////////
+
+      // Checking if cart is empty or not by checking the length of the cart array
+
+      if (this.props.cart.length > 0) {
+        // the cart is not empty
+        var _id = this.props._id;
+
+        // we check if the _id of the book we addToCart is inside the cart array
+        var cartIndex = this.props.cart.findIndex(function (cart) {
+          return cart._id === _id;
+        });
+
+        if (cartIndex === -1) {
+          // the index is not in the cart Array so we add the book to the cart
+          this.props.addToCart(book);
+        } else {
+          // the index is in the cart array so we update the quantity dispatching the updateCart() action creator
+          this.props.updateCart(_id, 1);
+        }
+      } else {
+        // cart is empty
+        this.props.addToCart(book);
+      }
     }
   }, {
     key: 'render',
@@ -11551,7 +11577,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ addToCart: _cartActions.addToCart }, dispatch);
+  return (0, _redux.bindActionCreators)({
+    addToCart: _cartActions.addToCart,
+    updateCart: _cartActions.updateCart
+  }, dispatch);
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BookItem);
 
@@ -11833,6 +11862,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var cardReducers = function cardReducers() {
@@ -11850,7 +11881,25 @@ var cardReducers = function cardReducers() {
       break;
 
     case "UPDATE_CART":
-      return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
+      // create a copy of the curent state
+      var curentBookToUpdate = [].concat(_toConsumableArray(state.cart));
+
+      // determine in wich index of the cart array are the id we want to update by the methode .findIndex(callbackfn)
+      var indexToUpdate = curentBookToUpdate.findIndex(function (book) {
+        return book._id === action._id;
+      });
+      // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
+      var objectToUpdate = curentBookToUpdate[indexToUpdate];
+
+      // Then we stock in a new variable the object to update merge with the value we want to update
+      // The key here "quantity" of the book obkject is sensible to the case to be updated
+      // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
+      var newBookToUpdate = _extends({}, objectToUpdate, { quantity: objectToUpdate.quantity + action.unit });
+
+      //stock in variable cartUpdate the cart updated at the specified index with methode .slice()with spread operator methode and append to it the newBookToUpdate
+      var cartUpdate = [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1)));
+
+      return _extends({}, state, { cart: cartUpdate });
       break;
   }
   return state;
