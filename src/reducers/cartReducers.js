@@ -14,7 +14,7 @@ export function cartReducers(state={cart:[]}, action){
 
     case "DELETE_CART_ITEM":
       return {...state,
-        cart:action.payload,
+        cart: action.payload,
         totalAmount: totals(action.payload).amount,
         totalQty: totals(action.payload).qty,
         }
@@ -57,16 +57,15 @@ export function cartReducers(state={cart:[]}, action){
     }).reduce(function (a, b){
       return a + b;
     }, 0); // start suming from index 0
-    console.log(totalAmount);
+
 
     // CALCULATE QUANTITY
-
     const totalQty = payloadArr.map(function(qty){
       return qty.quantity;
     }).reduce(function(a , b){
       return a + b;
     }, 0);
-    console.log(totalQty);
+
 
     return {
       amount: totalAmount.toFixed(2),

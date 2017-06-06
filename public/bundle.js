@@ -11736,7 +11736,8 @@ var Cart = function (_React$Component) {
         _react2.default.createElement(
           'h5',
           null,
-          'Total Amount:'
+          'Total Amount: ',
+          this.props.totalAmount
         ),
         _react2.default.createElement(
           'button',
@@ -11775,7 +11776,16 @@ var Cart = function (_React$Component) {
             _react2.default.createElement(
               'h4',
               null,
-              ' Total: CHF '
+              ' Nbr of Product: ',
+              this.props.totalQty,
+              ' '
+            ),
+            _react2.default.createElement(
+              'h4',
+              null,
+              ' Total CHF: ',
+              this.props.totalAmount,
+              ' '
             ),
             _react2.default.createElement(
               _reactBootstrap.Button,
@@ -11798,7 +11808,9 @@ var Cart = function (_React$Component) {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    totalAmount: state.cart.totalAmount,
+    totalQty: state.cart.totalQty
   };
 }
 
@@ -11985,16 +11997,14 @@ function totals(payloadArr) {
   }).reduce(function (a, b) {
     return a + b;
   }, 0); // start suming from index 0
-  console.log(totalAmount);
+
 
   // CALCULATE QUANTITY
-
   var totalQty = payloadArr.map(function (qty) {
     return qty.quantity;
   }).reduce(function (a, b) {
     return a + b;
   }, 0);
-  console.log(totalQty);
 
   return {
     amount: totalAmount.toFixed(2),
