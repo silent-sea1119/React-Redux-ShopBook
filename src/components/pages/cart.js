@@ -4,8 +4,29 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {deleteCartItem, updateCart} from '../../actions/cartActions';
+import {Modal, Button} from'react-bootstrap';
 
 class Cart extends React.Component{
+
+  constructor(){
+    super();
+    this.state = {
+      showModal: false
+    }
+  }
+
+  open(){
+    this.setState({
+      showModal: true
+    })
+  }
+
+  close(){
+    this.setState({
+      showModal: false
+    })
+  }
+
 
   onDelete(_id){
     // create a copy of the curent state
@@ -38,6 +59,7 @@ class Cart extends React.Component{
   }
 
 
+
   render(){
     if (this.props.cart[0]){
       return this.renderCart()
@@ -66,6 +88,19 @@ class Cart extends React.Component{
       <div>
       <h3> Shoping Cart </h3>
         {cartItemList}
+        <h5>Total Amount:</h5>
+        <button onClick={this.open.bind(this)}>Proceed to Checkout</button>
+        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Text in a modal TEST </h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.close.bind(this)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
