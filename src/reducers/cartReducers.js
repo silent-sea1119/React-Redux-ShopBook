@@ -1,14 +1,23 @@
 "use strict"
 
-let cardReducers = function(state={cart:[]}, action){
+//CART REDUCERS
+export function cartReducers(state={cart:[]}, action){
   switch (action.type) {
 
     case "ADD_TO_CART":
-      return {cart:[...state, ...action.payload]}
+      return {...state,
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
+      }
       break;
 
     case "DELETE_CART_ITEM":
-      return {cart:[...state, ...action.payload]}
+      return {...state,
+        cart:action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty,
+        }
       break;
 
     case "UPDATE_CART":
@@ -31,11 +40,36 @@ let cardReducers = function(state={cart:[]}, action){
       //stock in variable cartUpdate the cart updated at the specified index with methode .slice()with spread operator methode and append to it the newBookToUpdate
       let cartUpdate = [...curentBookToUpdate.slice(0,indexToUpdate), newBookToUpdate, ...curentBookToUpdate.slice(indexToUpdate + 1)];
 
-      return {...state, cart: cartUpdate};
+      return {...state,
+        cart: cartUpdate,
+        totalAmount: totals(cartUpdate).amount,
+        totalQty: totals(cartUpdate).qty,
+      };
       break;
   }
   return state;
 }
 
+  //CALCULATE TOTALS
+  export function totals(payloadArr){
+    const totalAmount = payloadArr.map(function(cartArray){
+      return cartArray.price * cartArray.quantity;
+    }).reduce(function (a, b){
+      return a + b;
+    }, 0); // start suming from index 0
+    console.log(totalAmount);
 
-export default cardReducers;
+    // CALCULATE QUANTITY
+
+    const totalQty = payloadArr.map(function(qty){
+      return qty.quantity;
+    }).reduce(function(a , b){
+      return a + b;
+    }, 0);
+    console.log(totalQty);
+
+    return {
+      amount: totalAmount.toFixed(2),
+      qty: totalQty
+    }
+  }

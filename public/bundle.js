@@ -11223,13 +11223,11 @@ var _bookReducers2 = _interopRequireDefault(_bookReducers);
 
 var _cartReducers = __webpack_require__(107);
 
-var _cartReducers2 = _interopRequireDefault(_cartReducers);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var allReducers = (0, _redux.combineReducers)({
   books: _bookReducers2.default,
-  cart: _cartReducers2.default
+  cart: _cartReducers.cartReducers
 });
 
 exports.default = allReducers;
@@ -11754,7 +11752,7 @@ var Cart = function (_React$Component) {
             _react2.default.createElement(
               _reactBootstrap.Modal.Title,
               null,
-              'Modal heading'
+              'Thank You!'
             )
           ),
           _react2.default.createElement(
@@ -11763,12 +11761,22 @@ var Cart = function (_React$Component) {
             _react2.default.createElement(
               'h4',
               null,
-              'Text in a modal TEST '
+              'Your order has been saved!'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'You ll receive an email confirmation'
             )
           ),
           _react2.default.createElement(
             _reactBootstrap.Modal.Footer,
             null,
+            _react2.default.createElement(
+              'h4',
+              null,
+              ' Total: CHF '
+            ),
             _react2.default.createElement(
               _reactBootstrap.Button,
               { onClick: this.close.bind(this) },
@@ -11906,26 +11914,39 @@ exports.default = bookReducers;
 "use strict";
 
 
+//CART REDUCERS
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+exports.cartReducers = cartReducers;
+exports.totals = totals;
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var cardReducers = function cardReducers() {
+function cartReducers() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { cart: [] };
   var action = arguments[1];
 
   switch (action.type) {
 
     case "ADD_TO_CART":
-      return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
+      return _extends({}, state, {
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
+      });
       break;
 
     case "DELETE_CART_ITEM":
-      return { cart: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
+      return _extends({}, state, {
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
+      });
       break;
 
     case "UPDATE_CART":
@@ -11947,13 +11968,39 @@ var cardReducers = function cardReducers() {
       //stock in variable cartUpdate the cart updated at the specified index with methode .slice()with spread operator methode and append to it the newBookToUpdate
       var cartUpdate = [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1)));
 
-      return _extends({}, state, { cart: cartUpdate });
+      return _extends({}, state, {
+        cart: cartUpdate,
+        totalAmount: totals(cartUpdate).amount,
+        totalQty: totals(cartUpdate).qty
+      });
       break;
   }
   return state;
-};
+}
 
-exports.default = cardReducers;
+//CALCULATE TOTALS
+function totals(payloadArr) {
+  var totalAmount = payloadArr.map(function (cartArray) {
+    return cartArray.price * cartArray.quantity;
+  }).reduce(function (a, b) {
+    return a + b;
+  }, 0); // start suming from index 0
+  console.log(totalAmount);
+
+  // CALCULATE QUANTITY
+
+  var totalQty = payloadArr.map(function (qty) {
+    return qty.quantity;
+  }).reduce(function (a, b) {
+    return a + b;
+  }, 0);
+  console.log(totalQty);
+
+  return {
+    amount: totalAmount.toFixed(2),
+    qty: totalQty
+  };
+}
 
 /***/ }),
 /* 108 */

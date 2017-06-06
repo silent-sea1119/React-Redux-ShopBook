@@ -92,12 +92,14 @@ class Cart extends React.Component{
         <button onClick={this.open.bind(this)}>Proceed to Checkout</button>
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Thank You!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal TEST </h4>
+            <h4>Your order has been saved!</h4>
+              <p>You ll receive an email confirmation</p>
           </Modal.Body>
           <Modal.Footer>
+            <h4> Total: CHF </h4>
             <Button onClick={this.close.bind(this)}>Close</Button>
           </Modal.Footer>
         </Modal>

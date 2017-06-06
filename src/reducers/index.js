@@ -2,7 +2,7 @@
 
 import {combineReducers} from 'redux';
 import bookReducers from './bookReducers';
-import cartReducers from './cartReducers';
+import {cartReducers} from './cartReducers';
 
 const allReducers = combineReducers({
   books: bookReducers,
