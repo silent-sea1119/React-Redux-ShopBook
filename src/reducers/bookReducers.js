@@ -37,7 +37,7 @@ const bookReducers = function(state={books:[]}, action){
     // determine in wich index of the books array are the id we want to delete by the methode .findIndex(callbackfn)
     const indexToDelete = curentBookToDelete.findIndex(
       function(book){
-        return book._id === action.payload._id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
+        return book._id == action.payload; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
       }
     )
     //remove the book at the specified index with methode .slice() with the babel preset stage-1 methode spread operator

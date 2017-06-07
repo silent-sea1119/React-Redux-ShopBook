@@ -50,13 +50,15 @@ export function cartReducers(state={cart:[]}, action){
   return state;
 }
 
-  //CALCULATE TOTALS
+  //CALCULATE TOTALS AND QUANTITY
   export function totals(payloadArr){
+
+    // CALCULATE TOTAL
     const totalAmount = payloadArr.map(function(cartArray){
       return cartArray.price * cartArray.quantity;
     }).reduce(function (a, b){
       return a + b;
-    }, 0); // start suming from index 0
+    }, 0); // start suming from valeur initial 0
 
 
     // CALCULATE QUANTITY
@@ -72,3 +74,17 @@ export function cartReducers(state={cart:[]}, action){
       qty: totalQty
     }
   }
+
+////////////////////
+//.reduce Methode//
+//////////////////
+
+//arr.reduce(callback) or arr.reduce(callback, valeurInitiale)
+// exemple 1
+//[0, 1, 2, 3, 4].reduce(
+//  (accumulateur, valeurCourante) => accumulateur + valeurCourante;
+//);
+// exemple 2
+//[0, 1, 2, 3, 4].reduce(function(accumulateur, valeurCourante){
+//  return accumulateur + valeurCourante;
+//}, 10);

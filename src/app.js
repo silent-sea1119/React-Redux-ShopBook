@@ -66,7 +66,7 @@ import BookList from './components/pages/booksList';
 // Action 2 post book
 store.dispatch(postBook([{
   _id: 3,
-  title: "tintin au tibet",
+  title: "Tintin au tibet",
   description: "description",
   price: 24.5
   }])

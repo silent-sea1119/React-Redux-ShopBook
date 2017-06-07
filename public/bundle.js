@@ -11153,7 +11153,7 @@ var BooksList = function (_React$Component) {
         price: 29.5
       }, {
         _id: 2,
-        title: "la belle et la bete",
+        title: "La belle et la bete",
         description: "Disney",
         price: 18
       }]);
@@ -11339,7 +11339,7 @@ var store = (0, _redux.createStore)(_index2.default, middleware);
 // Action 2 post book
 store.dispatch((0, _bookActions.postBook)([{
   _id: 3,
-  title: "tintin au tibet",
+  title: "Tintin au tibet",
   description: "description",
   price: 24.5
 }]));
@@ -11380,6 +11380,10 @@ var _redux = __webpack_require__(15);
 
 var _bookActions = __webpack_require__(35);
 
+var _reactBootstrap = __webpack_require__(472);
+
+var _reactDom = __webpack_require__(100);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11409,37 +11413,86 @@ var BookForm = function (_React$Component) {
       this.props.postBook(book);
     }
   }, {
+    key: 'onDelete',
+    value: function onDelete() {
+      var bookId = (0, _reactDom.findDOMNode)(this.refs.delete).value;
+      this.props.deleteBook(bookId);
+    }
+  }, {
     key: 'render',
     value: function render() {
+
+      var booksList = this.props.books.map(function (booksArr) {
+        return _react2.default.createElement(
+          'option',
+          { key: booksArr._id },
+          ' ',
+          booksArr._id,
+          ' '
+        );
+      });
+
       return _react2.default.createElement(
-        'div',
+        _reactBootstrap.Well,
         null,
         _react2.default.createElement(
-          'form',
+          _reactBootstrap.Panel,
           null,
           _react2.default.createElement(
-            'p',
-            null,
-            'Title  ',
-            _react2.default.createElement('input', { type: 'text', name: 'title', ref: 'title' })
+            _reactBootstrap.FormGroup,
+            { controlId: 'title' },
+            _react2.default.createElement(
+              'p',
+              null,
+              'Title  ',
+              _react2.default.createElement('input', { type: 'text', name: 'title', ref: 'title' })
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Description  ',
+              _react2.default.createElement('input', { type: 'text', name: 'description', ref: 'description' })
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Price  ',
+              _react2.default.createElement('input', { type: 'text', name: 'price', ref: 'price' })
+            )
           ),
           _react2.default.createElement(
-            'p',
-            null,
-            'Description  ',
-            _react2.default.createElement('input', { type: 'text', name: 'description', ref: 'description' })
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            'Price  ',
-            _react2.default.createElement('input', { type: 'text', name: 'price', ref: 'price' })
+            _reactBootstrap.Button,
+            { onClick: this.handleSubmit.bind(this), bsStyle: 'primary' },
+            'Save'
           )
         ),
         _react2.default.createElement(
-          'button',
-          { onClick: this.handleSubmit.bind(this) },
-          'Save'
+          _reactBootstrap.Panel,
+          { style: { marginTop: '25px' } },
+          _react2.default.createElement(
+            _reactBootstrap.FormGroup,
+            { controlId: 'formControlsSelect' },
+            _react2.default.createElement(
+              _reactBootstrap.ControlLabel,
+              null,
+              'Select a book id to delete'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormControl,
+              { ref: 'delete', componentClass: 'select', placeholder: 'select' },
+              _react2.default.createElement(
+                'option',
+                { value: 'select' },
+                'select'
+              ),
+              booksList
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            { onClick: this.onDelete.bind(this), bsStyle: 'danger' },
+            'Delete Book'
+          )
         )
       );
     }
@@ -11448,11 +11501,20 @@ var BookForm = function (_React$Component) {
   return BookForm;
 }(_react2.default.Component);
 
-function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ postBook: _bookActions.postBook }, dispatch);
+function mapStateToProps(state) {
+  return {
+    books: state.books.books
+  };
 }
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(BookForm);
+function mapDispatchToProps(dispatch) {
+  return (0, _redux.bindActionCreators)({
+    postBook: _bookActions.postBook,
+    deleteBook: _bookActions.deleteBook
+  }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BookForm);
 
 /***/ }),
 /* 104 */
@@ -11872,7 +11934,7 @@ var bookReducers = function bookReducers() {
 
       // determine in wich index of the books array are the id we want to delete by the methode .findIndex(callbackfn)
       var indexToDelete = curentBookToDelete.findIndex(function (book) {
-        return book._id === action.payload._id; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
+        return book._id == action.payload; // if true the book is pass as parametre in findIndex() function wich ll stock the index of this book in the variable indexToDelete
       });
       //remove the book at the specified index with methode .slice() with the babel preset stage-1 methode spread operator
       return { books: [].concat(_toConsumableArray(curentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(curentBookToDelete.slice(indexToDelete + 1))) };
@@ -11990,13 +12052,15 @@ function cartReducers() {
   return state;
 }
 
-//CALCULATE TOTALS
+//CALCULATE TOTALS AND QUANTITY
 function totals(payloadArr) {
+
+  // CALCULATE TOTAL
   var totalAmount = payloadArr.map(function (cartArray) {
     return cartArray.price * cartArray.quantity;
   }).reduce(function (a, b) {
     return a + b;
-  }, 0); // start suming from index 0
+  }, 0); // start suming from valeur initial 0
 
 
   // CALCULATE QUANTITY
@@ -12011,6 +12075,20 @@ function totals(payloadArr) {
     qty: totalQty
   };
 }
+
+////////////////////
+//.reduce Methode//
+//////////////////
+
+//arr.reduce(callback) or arr.reduce(callback, valeurInitiale)
+// exemple 1
+//[0, 1, 2, 3, 4].reduce(
+//  (accumulateur, valeurCourante) => accumulateur + valeurCourante;
+//);
+// exemple 2
+//[0, 1, 2, 3, 4].reduce(function(accumulateur, valeurCourante){
+//  return accumulateur + valeurCourante;
+//}, 10);
 
 /***/ }),
 /* 108 */

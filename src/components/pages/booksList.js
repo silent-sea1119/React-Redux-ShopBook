@@ -22,7 +22,7 @@ class BooksList extends React.Component{
       },
       {
         _id: 2,
-        title: "la belle et la bete",
+        title: "La belle et la bete",
         description: "Disney",
         price: 18
       },]
