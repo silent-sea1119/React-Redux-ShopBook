@@ -9,6 +9,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import BookList from './components/pages/booksList';
+import Menu from './components/menu';
 
 
 
@@ -28,7 +29,10 @@ import BookList from './components/pages/booksList';
 
  render(
    <Provider store={store}>
+    <div>
+     <Menu />
      <BookList />
+    </div>
    </Provider>, document.getElementById('app')
  );
 

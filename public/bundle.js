@@ -11285,6 +11285,10 @@ var _booksList = __webpack_require__(98);
 
 var _booksList2 = _interopRequireDefault(_booksList);
 
+var _menu = __webpack_require__(486);
+
+var _menu2 = _interopRequireDefault(_menu);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //////////////////////////////
@@ -11302,7 +11306,12 @@ var store = (0, _redux.createStore)(_index2.default, middleware);
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
   { store: store },
-  _react2.default.createElement(_booksList2.default, null)
+  _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_menu2.default, null),
+    _react2.default.createElement(_booksList2.default, null)
+  )
 ), document.getElementById('app'));
 
 /////////////////////////////////////
@@ -43696,6 +43705,103 @@ function isReactComponent(component) {
   return !!(component && component.prototype && component.prototype.isReactComponent);
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 486 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(14);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrap = __webpack_require__(472);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Menu = function (_React$Component) {
+  _inherits(Menu, _React$Component);
+
+  function Menu() {
+    _classCallCheck(this, Menu);
+
+    return _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).apply(this, arguments));
+  }
+
+  _createClass(Menu, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactBootstrap.Navbar,
+        { inverse: true, fixedTop: true },
+        _react2.default.createElement(
+          _reactBootstrap.Navbar.Header,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Navbar.Brand,
+            null,
+            _react2.default.createElement(
+              'a',
+              { href: '/' },
+              'React-Bootstrap'
+            )
+          ),
+          _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Navbar.Collapse,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Nav,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.NavItem,
+              { eventKey: 1, href: '#' },
+              'Link'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.NavItem,
+              { eventKey: 2, href: '#' },
+              'Link'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Nav,
+            { pullRight: true },
+            _react2.default.createElement(
+              _reactBootstrap.NavItem,
+              { eventKey: 1, href: '#' },
+              'Link Right'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.NavItem,
+              { eventKey: 2, href: '#' },
+              'Link Right'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Menu;
+}(_react2.default.Component);
+
+exports.default = Menu;
 
 /***/ })
 /******/ ]);
