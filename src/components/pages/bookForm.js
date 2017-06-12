@@ -42,7 +42,7 @@ onDelete(){
             <p>Description  <input type="text" name="description" ref="description"></input></p>
             <p>Price  <input type="text" name="price" ref="price"></input></p>
           </FormGroup>
-          <Button onClick={this.handleSubmit.bind(this)} bsStyle="primary">Save</Button>
+          <Button onClick={this.handleSubmit.bind(this)} bsStyle="success">Save</Button>
         </Panel>
 
         <Panel style={{marginTop:'25px'}}>

@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addToCart, updateCart} from '../../actions/cartActions';
+import {Well, Row, Col, Button} from 'react-bootstrap';
 
 
 class BookItem extends React.Component{
@@ -50,12 +51,16 @@ class BookItem extends React.Component{
 
   render(){
     return(
-      <div>
-        <h2>{this.props.title}</h2>
-        <h5>{this.props.description}</h5>
-        <h3>{this.props.price}</h3>
-        <button onClick={this.handleCart.bind(this)}> add to Cart </button>
-      </div>
+      <Well>
+        <Row>
+          <Col xs={12}>
+            <h2>{this.props.title}</h2>
+            <h5>{this.props.description}</h5>
+            <h3>{this.props.price}</h3>
+            <Button onClick={this.handleCart.bind(this)} bsStyle="primary"> add to Cart </Button>
+          </Col>
+        </Row>
+      </Well>
 
     );
   }

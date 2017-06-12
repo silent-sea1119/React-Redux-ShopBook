@@ -11125,6 +11125,8 @@ var _cart = __webpack_require__(105);
 
 var _cart2 = _interopRequireDefault(_cart);
 
+var _reactBootstrap = __webpack_require__(472);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11163,8 +11165,8 @@ var BooksList = function (_React$Component) {
     value: function render() {
       var booksList = this.props.books.map(function (booksArr) {
         return _react2.default.createElement(
-          'div',
-          { key: booksArr._id },
+          _reactBootstrap.Col,
+          { xs: 12, sm: 6, md: 4, key: booksArr._id },
           _react2.default.createElement(_bookItem2.default, {
             _id: booksArr._id,
             title: booksArr.title,
@@ -11175,16 +11177,28 @@ var BooksList = function (_React$Component) {
       });
 
       return _react2.default.createElement(
-        'div',
+        _reactBootstrap.Grid,
         null,
-        _react2.default.createElement(_cart2.default, null),
         _react2.default.createElement(
-          'h1',
+          _reactBootstrap.Row,
           null,
-          ' List of Book '
+          _react2.default.createElement(_cart2.default, null)
         ),
-        booksList,
-        _react2.default.createElement(_bookForm2.default, null)
+        _react2.default.createElement(
+          _reactBootstrap.Row,
+          null,
+          _react2.default.createElement(
+            'h1',
+            null,
+            ' List of Book '
+          ),
+          booksList,
+          _react2.default.createElement(
+            _reactBootstrap.Col,
+            { xs: 12, sm: 6 },
+            _react2.default.createElement(_bookForm2.default, null)
+          )
+        )
       );
     }
   }]);
@@ -11471,7 +11485,7 @@ var BookForm = function (_React$Component) {
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { onClick: this.handleSubmit.bind(this), bsStyle: 'primary' },
+            { onClick: this.handleSubmit.bind(this), bsStyle: 'success' },
             'Save'
           )
         ),
@@ -11548,6 +11562,8 @@ var _redux = __webpack_require__(15);
 
 var _cartActions = __webpack_require__(36);
 
+var _reactBootstrap = __webpack_require__(472);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -11610,27 +11626,35 @@ var BookItem = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        _reactBootstrap.Well,
         null,
         _react2.default.createElement(
-          'h2',
+          _reactBootstrap.Row,
           null,
-          this.props.title
-        ),
-        _react2.default.createElement(
-          'h5',
-          null,
-          this.props.description
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          this.props.price
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.handleCart.bind(this) },
-          ' add to Cart '
+          _react2.default.createElement(
+            _reactBootstrap.Col,
+            { xs: 12 },
+            _react2.default.createElement(
+              'h2',
+              null,
+              this.props.title
+            ),
+            _react2.default.createElement(
+              'h5',
+              null,
+              this.props.description
+            ),
+            _react2.default.createElement(
+              'h3',
+              null,
+              this.props.price
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { onClick: this.handleCart.bind(this), bsStyle: 'primary' },
+              ' add to Cart '
+            )
+          )
         )
       );
     }
@@ -11758,46 +11782,84 @@ var Cart = function (_React$Component) {
 
       var cartItemList = this.props.cart.map(function (cartItem) {
         return _react2.default.createElement(
-          'div',
+          _reactBootstrap.Panel,
           { key: cartItem._id },
           _react2.default.createElement(
-            'h4',
+            _reactBootstrap.Row,
             null,
-            cartItem.title
-          ),
-          _react2.default.createElement(
-            'h5',
-            null,
-            'CHF. -   ',
-            cartItem.price
-          ),
-          _react2.default.createElement(
-            'h5',
-            null,
-            'QTY ',
-            cartItem.quantity
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.onIncrement.bind(this, cartItem._id) },
-            '+'
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.onDecrement.bind(this, cartItem._id, cartItem.quantity) },
-            '-'
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.onDelete.bind(this, cartItem._id) },
-            ' Delete '
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 12, sm: 4 },
+              _react2.default.createElement(
+                'h4',
+                null,
+                cartItem.title
+              ),
+              _react2.default.createElement(
+                'span',
+                null,
+                '    '
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 12, sm: 2 },
+              _react2.default.createElement(
+                'h5',
+                null,
+                'CHF. -   ',
+                cartItem.price
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 12, sm: 2 },
+              _react2.default.createElement(
+                'h5',
+                null,
+                'qty ',
+                _react2.default.createElement(
+                  _reactBootstrap.Label,
+                  { bsStyle: 'success' },
+                  cartItem.quantity
+                )
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 6, sm: 4 },
+              _react2.default.createElement(
+                _reactBootstrap.ButtonGroup,
+                null,
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { onClick: this.onIncrement.bind(this, cartItem._id), bsStyle: 'default', bsSize: 'small' },
+                  '+'
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { onClick: this.onDecrement.bind(this, cartItem._id, cartItem.quantity), bsStyle: 'default', bsSize: 'small' },
+                  '-'
+                ),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '     '
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { onClick: this.onDelete.bind(this, cartItem._id), bsStyle: 'danger', bsSize: 'small' },
+                  ' Delete '
+                )
+              )
+            )
           )
         );
       }, this);
 
       return _react2.default.createElement(
-        'div',
-        null,
+        _reactBootstrap.Panel,
+        { header: 'Cart', bsStyle: 'primary' },
         _react2.default.createElement(
           'h3',
           null,
@@ -11805,63 +11867,71 @@ var Cart = function (_React$Component) {
         ),
         cartItemList,
         _react2.default.createElement(
-          'h5',
+          _reactBootstrap.Row,
           null,
-          'Total Amount: ',
-          this.props.totalAmount
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.open.bind(this) },
-          'Proceed to Checkout'
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Modal,
-          { show: this.state.showModal, onHide: this.close.bind(this) },
           _react2.default.createElement(
-            _reactBootstrap.Modal.Header,
-            { closeButton: true },
+            _reactBootstrap.Col,
+            { xs: 12 },
             _react2.default.createElement(
-              _reactBootstrap.Modal.Title,
+              'h5',
               null,
-              'Thank You!'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Body,
-            null,
-            _react2.default.createElement(
-              'h4',
-              null,
-              'Your order has been saved!'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'You ll receive an email confirmation'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Footer,
-            null,
-            _react2.default.createElement(
-              'h4',
-              null,
-              ' Nbr of Product: ',
-              this.props.totalQty,
-              ' '
-            ),
-            _react2.default.createElement(
-              'h4',
-              null,
-              ' Total CHF: ',
-              this.props.totalAmount,
-              ' '
+              'Total Amount: ',
+              this.props.totalAmount
             ),
             _react2.default.createElement(
               _reactBootstrap.Button,
-              { onClick: this.close.bind(this) },
-              'Close'
+              { onClick: this.open.bind(this), bsStyle: 'success', bsSize: 'small' },
+              'Proceed to Checkout'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Modal,
+              { show: this.state.showModal, onHide: this.close.bind(this) },
+              _react2.default.createElement(
+                _reactBootstrap.Modal.Header,
+                { closeButton: true },
+                _react2.default.createElement(
+                  _reactBootstrap.Modal.Title,
+                  null,
+                  'Thank You!'
+                )
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Modal.Body,
+                null,
+                _react2.default.createElement(
+                  'h4',
+                  null,
+                  'Your order has been saved!'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'You ll receive an email confirmation'
+                )
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Modal.Footer,
+                null,
+                _react2.default.createElement(
+                  'h4',
+                  null,
+                  ' Nbr of Product: ',
+                  this.props.totalQty,
+                  ' '
+                ),
+                _react2.default.createElement(
+                  'h4',
+                  null,
+                  ' Total CHF: ',
+                  this.props.totalAmount,
+                  ' '
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { onClick: this.close.bind(this) },
+                  'Close'
+                )
+              )
             )
           )
         )

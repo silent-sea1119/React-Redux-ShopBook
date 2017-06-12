@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {deleteCartItem, updateCart} from '../../actions/cartActions';
-import {Modal, Button} from'react-bootstrap';
+import {Modal, Button, ButtonGroup, Col, Row, Panel, Label} from'react-bootstrap';
 
 class Cart extends React.Component{
 
@@ -73,38 +73,54 @@ class Cart extends React.Component{
 
     let cartItemList = this.props.cart.map(function(cartItem){
       return(
-        <div key={cartItem._id}>
-          <h4>{cartItem.title}</h4>
-          <h5>CHF. -   {cartItem.price}</h5>
-          <h5>QTY {cartItem.quantity}</h5>
-          <button onClick={this.onIncrement.bind(this, cartItem._id)}>+</button>
-          <button onClick={this.onDecrement.bind(this, cartItem._id, cartItem.quantity)}>-</button>
-          <button onClick={this.onDelete.bind(this, cartItem._id)}> Delete </button>
-        </div>
+        <Panel key={cartItem._id}>
+          <Row>
+            <Col xs={12} sm={4}>
+              <h4>{cartItem.title}</h4><span>    </span>
+            </Col>
+            <Col xs={12} sm={2}>
+              <h5>CHF. -   {cartItem.price}</h5>
+            </Col>
+            <Col xs={12} sm={2}>
+              <h5>qty <Label bsStyle="success">{cartItem.quantity}</Label></h5>
+            </Col>
+            <Col xs={6} sm={4}>
+              <ButtonGroup>
+                <Button onClick={this.onIncrement.bind(this, cartItem._id)} bsStyle="default" bsSize="small">+</Button>
+                <Button onClick={this.onDecrement.bind(this, cartItem._id, cartItem.quantity)} bsStyle="default" bsSize="small">-</Button><span>     </span>
+                <Button onClick={this.onDelete.bind(this, cartItem._id)} bsStyle="danger" bsSize="small"> Delete </Button>
+              </ButtonGroup>
+            </Col>
+          </Row>
+        </Panel>
       )
     }, this)
 
     return (
-      <div>
+      <Panel header="Cart" bsStyle="primary">
       <h3> Shoping Cart </h3>
         {cartItemList}
-        <h5>Total Amount: {this.props.totalAmount}</h5>
-        <button onClick={this.open.bind(this)}>Proceed to Checkout</button>
-        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Thank You!</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Your order has been saved!</h4>
-              <p>You ll receive an email confirmation</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <h4> Nbr of Product: {this.props.totalQty} </h4>
-            <h4> Total CHF: {this.props.totalAmount} </h4>
-            <Button onClick={this.close.bind(this)}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+        <Row>
+          <Col xs={12}>
+          <h5>Total Amount: {this.props.totalAmount}</h5>
+          <Button onClick={this.open.bind(this)} bsStyle="success" bsSize="small">Proceed to Checkout</Button>
+            <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Thank You!</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h4>Your order has been saved!</h4>
+                  <p>You ll receive an email confirmation</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <h4> Nbr of Product: {this.props.totalQty} </h4>
+                <h4> Total CHF: {this.props.totalAmount} </h4>
+                <Button onClick={this.close.bind(this)}>Close</Button>
+              </Modal.Footer>
+            </Modal>
+          </Col>
+        </Row>
+      </Panel>
     )
   }
 

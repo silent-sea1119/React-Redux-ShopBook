@@ -7,6 +7,7 @@ import {getBooks} from '../../actions/bookActions';
 import BookItem from './bookItem';
 import BookForm from './bookForm';
 import Cart from './cart';
+import {Well, Row, Col, Button, Grid} from 'react-bootstrap';
 
 
 
@@ -32,25 +33,30 @@ class BooksList extends React.Component{
   render(){
     let booksList = this.props.books.map(function(booksArr){
       return(
-        <div key={booksArr._id}>
+        <Col xs={12} sm={6} md={4} key={booksArr._id}>
           <BookItem
             _id= {booksArr._id}
             title= {booksArr.title}
             description= {booksArr.description}
             price= {booksArr.price}
           />
-        </div>
+        </Col>
       )
     })
 
     return(
-      <div>
-        <Cart />
-        <h1> List of Book </h1>
-        {booksList}
-        <BookForm />
-
-      </div>
+      <Grid>
+        <Row>
+          <Cart />
+        </Row>
+        <Row>
+          <h1> List of Book </h1>
+          {booksList}
+          <Col xs={12} sm={6}>
+            <BookForm />
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }
