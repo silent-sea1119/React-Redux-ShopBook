@@ -11880,7 +11880,7 @@ var Cart = function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactBootstrap.Button,
-              { onClick: this.open.bind(this), bsStyle: 'success', bsSize: 'small' },
+              { onClick: this.open.bind(this), bsStyle: 'success', bsSize: 'default' },
               'Proceed to Checkout'
             ),
             _react2.default.createElement(
@@ -43817,7 +43817,7 @@ var Menu = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         _reactBootstrap.Navbar,
-        { inverse: true, fixedTop: true },
+        { inverse: true },
         _react2.default.createElement(
           _reactBootstrap.Navbar.Header,
           null,
@@ -43827,7 +43827,7 @@ var Menu = function (_React$Component) {
             _react2.default.createElement(
               'a',
               { href: '/' },
-              'React-Bootstrap'
+              'My Books App'
             )
           ),
           _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
@@ -43840,13 +43840,13 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 1, href: '#' },
-              'Link'
+              { eventKey: 1, href: '/about' },
+              'About'
             ),
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 2, href: '#' },
-              'Link'
+              { eventKey: 2, href: '/contact' },
+              'Contact Us'
             )
           ),
           _react2.default.createElement(
@@ -43854,13 +43854,18 @@ var Menu = function (_React$Component) {
             { pullRight: true },
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 1, href: '#' },
-              'Link Right'
+              { eventKey: 1, href: '/admin' },
+              'Admin'
             ),
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 2, href: '#' },
-              'Link Right'
+              { eventKey: 2, href: '/cart' },
+              'Your Cart',
+              _react2.default.createElement(
+                _reactBootstrap.Badge,
+                { className: 'badge' },
+                '1'
+              )
             )
           )
         )
