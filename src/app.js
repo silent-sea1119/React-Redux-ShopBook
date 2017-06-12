@@ -10,6 +10,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import BookList from './components/pages/booksList';
 import Menu from './components/menu';
+import Footer from './components/footer';
 
 
 
@@ -32,6 +33,7 @@ import Menu from './components/menu';
     <div>
      <Menu />
      <BookList />
+     <Footer />
     </div>
    </Provider>, document.getElementById('app')
  );
