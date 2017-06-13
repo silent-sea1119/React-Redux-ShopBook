@@ -11,6 +11,10 @@ import {Provider} from 'react-redux';
 import BookList from './components/pages/booksList';
 import Menu from './components/menu';
 import Footer from './components/footer';
+import Main from './components/main';
+import BookForm from './components/pages/bookForm';
+import Cart from './components/pages/cart';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 
@@ -30,11 +34,13 @@ import Footer from './components/footer';
 
  render(
    <Provider store={store}>
-    <div>
-     <Menu />
-     <BookList />
-     <Footer />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={ Main } />
+        <Route exact path="/admin" component={ BookForm } />
+        <Route exact path="/shopingcart" component={ Cart } />
+      </Switch>
+    </Router>
    </Provider>, document.getElementById('app')
  );
 

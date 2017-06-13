@@ -50,7 +50,6 @@ class BooksList extends React.Component{
           <Cart />
         </Row>
         <Row>
-          <h1> List of Book </h1>
           {booksList}
           <Col xs={12} sm={6}>
             <BookForm />

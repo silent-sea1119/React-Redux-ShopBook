@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {Nav, NavItem, Navbar, Badge} from 'react-bootstrap';
+import {connect} from 'react-redux';
 
 class Menu extends React.Component{
   render(){
@@ -20,7 +21,7 @@ class Menu extends React.Component{
      </Nav>
      <Nav pullRight>
        <NavItem eventKey={1} href="/admin">Admin</NavItem>
-       <NavItem eventKey={2} href="/cart">Your Cart<Badge className="badge">1</Badge></NavItem>
+       <NavItem eventKey={2} href="/shopingcart">Your Cart<Badge className="badge">{this.props.qty}</Badge></NavItem>
      </Nav>
    </Navbar.Collapse>
  </Navbar>
@@ -29,4 +30,10 @@ class Menu extends React.Component{
   }
 }
 
-export default Menu;
+function mapStateToProps(state){
+  return{
+    qty: state.cart.totalQty
+
+  }
+}
+export default connect(mapStateToProps)(Menu);

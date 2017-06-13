@@ -54,9 +54,9 @@ class BookItem extends React.Component{
       <Well>
         <Row>
           <Col xs={12}>
-            <h2>{this.props.title}</h2>
+            <h4>{this.props.title}</h4>
             <h5>{this.props.description}</h5>
-            <h3>{this.props.price}</h3>
+            <h4>{this.props.price}</h4>
             <Button onClick={this.handleCart.bind(this)} bsStyle="primary"> add to Cart </Button>
           </Col>
         </Row>
