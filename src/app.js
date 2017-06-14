@@ -12,7 +12,7 @@ import BookList from './components/pages/booksList';
 import Main from './components/main';
 import BookForm from './components/pages/bookForm';
 import Cart from './components/pages/cart';
-import { BrowserRouter, Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu';
 import Footer from './components/footer';
 
@@ -35,17 +35,13 @@ import Footer from './components/footer';
 
  render(
    <Provider store={store}>
-    <BrowserRouter>
-      <div>
-        <Menu />
-        <Switch>
-          <Route path="/" component={ Main } />
-          <Route path="/admin" component={ Main } />
+    <Router>
+      <Switch>
+          <Route exact path="/" component={ Main } />
+          <Route path="/admin" component={ BookForm } />
           <Route path="/shopingcart" component={ Cart } />
-        </Switch>
-        <Footer />
-      </div>
-    </BrowserRouter>
+      </Switch>
+    </Router>
    </Provider>, document.getElementById('app')
  );
 
