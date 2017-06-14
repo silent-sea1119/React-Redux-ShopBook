@@ -8,13 +8,12 @@ import {postBook, deleteBook, updateBook} from './actions/bookActions';
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-import BookList from './components/pages/booksList';
+import BooksList from './components/pages/booksList';
 import Main from './components/main';
-import BookForm from './components/pages/bookForm';
+import BooksForm from './components/pages/bookForm';
 import Cart from './components/pages/cart';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Menu from './components/menu';
-import Footer from './components/footer';
+import {Router, Route, browserHistory, IndexRoute } from 'react-router';
+
 
 
 
@@ -33,16 +32,22 @@ import Footer from './components/footer';
  //   //store.getState()[1].Price
  // })
 
- render(
-   <Provider store={store}>
-    <Router>
-      <Switch>
-          <Route exact path="/" component={ Main } />
-          <Route path="/admin" component={ BookForm } />
-          <Route path="/shopingcart" component={ Cart } />
-      </Switch>
+const Routes = (
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={Main}>
+        <IndexRoute component={BooksList}/>
+        <Route path="/admin" component={BooksForm}/>
+        <Route path="/cart" component={Cart}/>
+        <Route path="/about" component={Cart}/>
+        <Route path="/contact" component={Cart}/>
+      </Route>
     </Router>
-   </Provider>, document.getElementById('app')
+  </Provider>
+)
+
+ render(
+   Routes, document.getElementById('app')
  );
 
 /////////////////////////////////////
