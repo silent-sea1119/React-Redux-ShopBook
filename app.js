@@ -22,12 +22,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 // STARTING OUR API
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/bookshop'); // here we ask to connect our api with our database named bookshop if the database dont exsite mongoose ll create it automaticely
 
-var Books = require('./Models/books.js')
+Books = require('./models/books.js');
 
 //------->>POST BOOKS <<-----------
 app.post('/books', function(req, res){
@@ -48,6 +50,8 @@ app.post('/books', function(req, res){
 app.get('*', function(req, res){
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 })
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

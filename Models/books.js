@@ -1,9 +1,9 @@
 "use strict"
 
-var mongoose = require(mongoose);
+var mongoose = require('mongoose');
 
 // we create and define our schema here
-var booksSchema = mongoose.schema({
+var booksSchema = mongoose.Schema({
   title: String,
   description: String,
   image: String,
@@ -12,7 +12,7 @@ var booksSchema = mongoose.schema({
 });
 
 // and define our model using the schema
-var Books = mongoose.model(Books, booksSchema);
+var Books = mongoose.model('Books', booksSchema);
 
 // and export our variable Books
 module.exports = Books;
