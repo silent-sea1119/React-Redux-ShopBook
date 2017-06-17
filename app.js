@@ -71,7 +71,7 @@ app.delete('/books/:_id', function(req, res){
 
 app.put('/books/:_id', function(req, res){
   var book = req.body;
-
+  var query = {_id: req.params._id};
   var update = {
     '$set':{
       title: book.title,
@@ -80,8 +80,6 @@ app.put('/books/:_id', function(req, res){
       price: book.price
     }
   };
-
-  var query = req.params._id;
 
   var options = {new: true};
 
