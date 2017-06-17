@@ -31,11 +31,22 @@ mongoose.connect('mongodb://localhost:27017/bookshop'); // here we ask to connec
 
 Books = require('./models/books.js');
 
-//------->>POST BOOKS <<-----------
+//------->>POST BOOKS <<-------------
 app.post('/books', function(req, res){
   var book = req.body;
 
   Books.create(book, function(err, books){
+    if (err){
+      throw err;
+    }
+    res.json(books);
+  })
+});
+
+//------->>GET BOOKS <<-------------
+
+app.get('/books',function(req, res){
+  Books.find(function(err, books){
     if (err){
       throw err;
     }
