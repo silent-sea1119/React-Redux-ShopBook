@@ -13,6 +13,7 @@ import Main from './components/main';
 import BooksForm from './components/pages/bookForm';
 import Cart from './components/pages/cart';
 import {Router, Route, browserHistory, IndexRoute } from 'react-router';
+import thunk from 'redux-thunk';
 
 
 
@@ -23,7 +24,7 @@ import {Router, Route, browserHistory, IndexRoute } from 'react-router';
 //////////////////////////////
 // STEP 1 CREATE THE STORE //
 ////////////////////////////
- const middleware = applyMiddleware(logger); // to use logger  middleware (console state improvement) first instal it with this cli npm i --save-dev redux-logger then we import applyMiddleware from 'redux' and logger 'redux-logger' then declare the middleware on this line and add middleware after the reducer in createStore(reducers, middleware);
+ const middleware = applyMiddleware(thunk, logger); // to use logger  middleware (console state improvement) first instal it with this cli npm i --save-dev redux-logger then we import applyMiddleware from 'redux' and logger 'redux-logger' then declare the middleware on this line and add middleware after the reducer in createStore(reducers, middleware);
  const store = createStore(Reducers, middleware);
  // we use redux-logger middleware to read the state in the console more efficiently so we get ride of this line:
  // store.subscribe(function(){
