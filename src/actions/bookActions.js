@@ -31,10 +31,17 @@ export function postBook(book){
 
 // delete book action creator
 export function deleteBook(id){
-  return {
-    type: "DELETE_BOOK",
-    payload: id
-  }
+  return function(dispatch){
+    axios.delete('/books/' + id)
+      .then (function(response){
+        dispatch({type: "DELETE_BOOK", payload: id})
+      })
+      .catch (function(err){
+        dispatch({type: "DELETE_REFUSED", payload: err + "an error occu the book was not deleted"})
+      })
+  //   type: "DELETE_BOOK",
+  //   payload: id
+   }
 }
 
 
