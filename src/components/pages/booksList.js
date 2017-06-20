@@ -26,6 +26,12 @@ class BooksList extends React.Component{
         title: "La belle et la bete",
         description: "Disney",
         price: 18
+      },
+      {
+        _id: 3,
+        title: "Alladin",
+        description: "Disney",
+        price: 29.5
       },]
     );
   }

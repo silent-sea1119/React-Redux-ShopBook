@@ -21834,6 +21834,11 @@ var BooksList = function (_React$Component) {
         title: "La belle et la bete",
         description: "Disney",
         price: 18
+      }, {
+        _id: 3,
+        title: "Alladin",
+        description: "Disney",
+        price: 29.5
       }]);
     }
   }, {
@@ -22133,22 +22138,26 @@ var Routes = _react2.default.createElement(
 
 
 // Action 2 post book
-store.dispatch((0, _bookActions.postBook)([{
-  _id: 3,
-  title: "Tintin au tibet",
-  description: "description",
-  price: 24.5
-}]));
+// store.dispatch(postBook({
+//   _id: 3,
+//   title: "Tintin au tibet",
+//   description: "description",
+//   price: 24.5
+//   })
+// )
+
 
 // Action 3 delete book
 // store.dispatch(deleteBook({id: 4}))
 
 
 // Action 4 update book
-store.dispatch((0, _bookActions.updateBook)({
-  _id: 1,
-  title: "Les 4 Fantastiques"
-}));
+// store.dispatch(updateBook({
+//   _id: 1,
+//   title: "Les 4 Fantastiques"
+//   })
+// )
+
 
 // Action Add to Cart
 //store.dispatch(addToCart([{id: 0}]));

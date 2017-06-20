@@ -17,7 +17,7 @@ export function postBook(book){
         dispatch({type: "POST_BOOK", payload: response.data})
       })
       .catch (function(err){
-        dispatch({type: "POST_BOOK_REJECTED", payload:" there was an erroe posting the book"})
+        dispatch({type: "POST_BOOK_REJECTED", payload: " there was an erroe posting the book"})
       })
   }
   // return {

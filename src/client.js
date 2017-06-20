@@ -83,13 +83,13 @@ const Routes = (
 
 
 // Action 2 post book
-store.dispatch(postBook([{
-  _id: 3,
-  title: "Tintin au tibet",
-  description: "description",
-  price: 24.5
-  }])
-)
+// store.dispatch(postBook({
+//   _id: 3,
+//   title: "Tintin au tibet",
+//   description: "description",
+//   price: 24.5
+//   })
+// )
 
 
 // Action 3 delete book
@@ -97,11 +97,11 @@ store.dispatch(postBook([{
 
 
 // Action 4 update book
-store.dispatch(updateBook({
-  _id: 1,
-  title: "Les 4 Fantastiques"
-  })
-)
+// store.dispatch(updateBook({
+//   _id: 1,
+//   title: "Les 4 Fantastiques"
+//   })
+// )
 
 
 
