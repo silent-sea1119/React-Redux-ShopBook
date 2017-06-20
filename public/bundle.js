@@ -7984,9 +7984,9 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // get book action creator
-function getBooks(book) {
+function getBooks() {
   return function (dispatch) {
-    _axios2.default.get('/books', book).then(function (response) {
+    _axios2.default.get('/books').then(function (response) {
       dispatch({ type: "GET_BOOKS", payload: response.data });
     }).catch(function (err) {
       dispatch({ type: "GET_BOOKS_ERROR", payload: "there was an error getting the data" });
@@ -8004,7 +8004,7 @@ function postBook(book) {
     _axios2.default.post('/books', book).then(function (response) {
       dispatch({ type: "POST_BOOK", payload: response.data });
     }).catch(function (err) {
-      dispatch({ type: "POST_BOOK_REJECTED", payload: " there was an erroe posting the book" });
+      dispatch({ type: "POST_BOOK_REJECTED", payload: " there was an error posting the book" });
     });
   };
   // return {
@@ -8020,7 +8020,7 @@ function deleteBook(id) {
     _axios2.default.delete('/books/' + id).then(function (response) {
       dispatch({ type: "DELETE_BOOK", payload: id });
     }).catch(function (err) {
-      dispatch({ type: "DELETE_REFUSED", payload: err + "an error occu the book was not deleted" });
+      dispatch({ type: "DELETE_REFUSED", payload: err + "an error occur the book was not deleted" });
     });
     //   type: "DELETE_BOOK",
     //   payload: id
@@ -21836,22 +21836,26 @@ var BooksList = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // dispatch the action getBooks as soon as the component BookList is loaded
-      this.props.getBooks([{
-        _id: 1,
-        title: "les 4 fantastique",
-        description: "Herge",
-        price: 29.5
-      }, {
-        _id: 2,
-        title: "La belle et la bete",
-        description: "Disney",
-        price: 18
-      }, {
-        _id: 3,
-        title: "Alladin",
-        description: "Disney",
-        price: 29.5
-      }]);
+      this.props.getBooks([]
+      // [{
+      //   _id: 1,
+      //   title: "les 4 fantastique",
+      //   description: "Herge",
+      //   price: 29.5
+      // },
+      // {
+      //   _id: 2,
+      //   title: "La belle et la bete",
+      //   description: "Disney",
+      //   price: 18
+      // },
+      // {
+      //   _id: 3,
+      //   title: "Alladin",
+      //   description: "Disney",
+      //   price: 29.5
+      // },]
+      );
     }
   }, {
     key: 'render',

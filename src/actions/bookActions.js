@@ -1,10 +1,11 @@
 "use strict"
 import axios from 'axios';
 
+
 // get book action creator
-export function getBooks(book){
+export function getBooks(){
   return function(dispatch){
-    axios.get('/books', book)
+    axios.get('/books')
       .then (function(response){
         dispatch({type: "GET_BOOKS", payload: response.data})
       })
@@ -19,6 +20,8 @@ export function getBooks(book){
   // }
 }
 
+
+
 // post book action creator
 export function postBook(book){
   return function(dispatch){
@@ -27,7 +30,7 @@ export function postBook(book){
         dispatch({type: "POST_BOOK", payload: response.data})
       })
       .catch (function(err){
-        dispatch({type: "POST_BOOK_REJECTED", payload: " there was an erroe posting the book"})
+        dispatch({type: "POST_BOOK_REJECTED", payload: " there was an error posting the book"})
       })
   }
   // return {
@@ -39,6 +42,7 @@ export function postBook(book){
 
 
 
+
 // delete book action creator
 export function deleteBook(id){
   return function(dispatch){
@@ -47,12 +51,13 @@ export function deleteBook(id){
         dispatch({type: "DELETE_BOOK", payload: id})
       })
       .catch (function(err){
-        dispatch({type: "DELETE_REFUSED", payload: err + "an error occu the book was not deleted"})
+        dispatch({type: "DELETE_REFUSED", payload: err + "an error occur the book was not deleted"})
       })
   //   type: "DELETE_BOOK",
   //   payload: id
    }
 }
+
 
 
 
