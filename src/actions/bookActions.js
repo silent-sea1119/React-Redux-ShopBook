@@ -3,10 +3,20 @@ import axios from 'axios';
 
 // get book action creator
 export function getBooks(book){
-  return {
-    type: "GET_BOOKS",
-    payload: book
+  return function(dispatch){
+    axios.get('/books', book)
+      .then (function(response){
+        dispatch({type: "GET_BOOKS", payload: response.data})
+      })
+      .catch (function(err){
+        dispatch({type: "GET_BOOKS_ERROR", payload: "there was an error getting the data"})
+
+      })
   }
+  // return {
+  //   type: "GET_BOOKS",
+  //   payload: book
+  // }
 }
 
 // post book action creator

@@ -7985,10 +7985,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // get book action creator
 function getBooks(book) {
-  return {
-    type: "GET_BOOKS",
-    payload: book
+  return function (dispatch) {
+    _axios2.default.get('/books', book).then(function (response) {
+      dispatch({ type: "GET_BOOKS", payload: response.data });
+    }).catch(function (err) {
+      dispatch({ type: "GET_BOOKS_ERROR", payload: "there was an error getting the data" });
+    });
   };
+  // return {
+  //   type: "GET_BOOKS",
+  //   payload: book
+  // }
 }
 
 // post book action creator
