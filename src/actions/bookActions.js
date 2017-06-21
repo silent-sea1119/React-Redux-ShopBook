@@ -5,7 +5,7 @@ import axios from 'axios';
 // get book action creator
 export function getBooks(){
   return function(dispatch){
-    axios.get('/books')
+    axios.get('/api/books')
       .then (function(response){
         dispatch({type: "GET_BOOKS", payload: response.data})
       })
@@ -25,7 +25,7 @@ export function getBooks(){
 // post book action creator
 export function postBook(book){
   return function(dispatch){
-    axios.post('/books', book)
+    axios.post('/api/books', book)
       .then (function(response){
         dispatch({type: "POST_BOOK", payload: response.data})
       })
@@ -46,7 +46,7 @@ export function postBook(book){
 // delete book action creator
 export function deleteBook(id){
   return function(dispatch){
-    axios.delete('/books/' + id)
+    axios.delete('/api/books/' + id)
       .then (function(response){
         dispatch({type: "DELETE_BOOK", payload: id})
       })

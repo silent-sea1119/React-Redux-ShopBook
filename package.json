@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www & node apiServer.js"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
@@ -21,6 +21,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "^4.15.3",
+    "http-proxy": "^1.16.2",
     "jade": "~1.11.0",
     "mongoose": "^4.10.6",
     "morgan": "~1.8.1",
