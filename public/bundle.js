@@ -12867,13 +12867,13 @@ var Cart = function (_React$Component) {
   }, {
     key: 'onIncrement',
     value: function onIncrement(_id) {
-      return this.props.updateCart(_id, 1);
+      return this.props.updateCart(_id, 1, this.props.cart);
     }
   }, {
     key: 'onDecrement',
     value: function onDecrement(_id, qty) {
       if (qty > 1) {
-        return this.props.updateCart(_id, -1);
+        return this.props.updateCart(_id, -1, this.props.cart);
       } else {}
     }
   }, {
