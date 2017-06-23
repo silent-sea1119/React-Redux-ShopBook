@@ -8357,9 +8357,15 @@ function updateBook(book) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.addToCart = addToCart;
 exports.deleteCartItem = deleteCartItem;
 exports.updateCart = updateCart;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function addToCart(book) {
   return {
     type: "ADD_TO_CART",
@@ -8376,11 +8382,29 @@ function deleteCartItem(cart) {
 }
 
 // Action creator update cart
-function updateCart(_id, unit) {
+function updateCart(_id, unit, cart) {
+
+  // create a copy of the curent state
+  var curentBookToUpdate = cart;
+
+  // determine in wich index of the cart array are the id we want to update by the methode .findIndex(callbackfn)
+  var indexToUpdate = curentBookToUpdate.findIndex(function (book) {
+    return book._id === _id;
+  });
+  // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
+  var objectToUpdate = curentBookToUpdate[indexToUpdate];
+
+  // Then we stock in a new variable the object to update merge with the value we want to update
+  // The key here "quantity" of the book obkject is sensible to the case to be updated
+  // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
+  var newBookToUpdate = _extends({}, objectToUpdate, { quantity: objectToUpdate.quantity + unit });
+
+  //stock in variable cartUpdate the cart updated at the specified index with methode .slice()with spread operator methode and append to it the newBookToUpdate
+  var cartUpdate = [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1)));
+
   return {
     type: "UPDATE_CART",
-    _id: _id,
-    unit: unit
+    payload: cartUpdate
 
   };
 }
@@ -24152,9 +24176,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.cartReducers = cartReducers;
 exports.totals = totals;
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function cartReducers() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { cart: [] };
   var action = arguments[1];
@@ -24178,28 +24199,11 @@ function cartReducers() {
       break;
 
     case "UPDATE_CART":
-      // create a copy of the curent state
-      var curentBookToUpdate = [].concat(_toConsumableArray(state.cart));
-
-      // determine in wich index of the cart array are the id we want to update by the methode .findIndex(callbackfn)
-      var indexToUpdate = curentBookToUpdate.findIndex(function (book) {
-        return book._id === action._id;
-      });
-      // we stock in a variable the object at indexToUpdate in the array curentBookToUpdate
-      var objectToUpdate = curentBookToUpdate[indexToUpdate];
-
-      // Then we stock in a new variable the object to update merge with the value we want to update
-      // The key here "quantity" of the book obkject is sensible to the case to be updated
-      // ( the ... make all the work without it we ll have an object inside an object no merge ll occur)
-      var newBookToUpdate = _extends({}, objectToUpdate, { quantity: objectToUpdate.quantity + action.unit });
-
-      //stock in variable cartUpdate the cart updated at the specified index with methode .slice()with spread operator methode and append to it the newBookToUpdate
-      var cartUpdate = [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1)));
 
       return _extends({}, state, {
-        cart: cartUpdate,
-        totalAmount: totals(cartUpdate).amount,
-        totalQty: totals(cartUpdate).qty
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
       });
       break;
   }
