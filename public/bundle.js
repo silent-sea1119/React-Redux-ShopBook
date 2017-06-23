@@ -24001,7 +24001,7 @@ var BookItem = function (_React$Component) {
           this.props.addToCart(book);
         } else {
           // the index is in the cart array so we update the quantity dispatching the updateCart() action creator
-          this.props.updateCart(_id, 1);
+          this.props.updateCart(_id, 1, this.props.cart);
         }
       } else {
         // cart is empty
