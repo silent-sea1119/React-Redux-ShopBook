@@ -13,8 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-// STARTING OUR API
+///////////////////////
+// STARTING OUR API //
+/////////////////////
 
 // request mongoose and conection to mongoDB
 var mongoose = require('mongoose');
@@ -28,16 +29,20 @@ db.on('error', console.err.bind(console, '#Mongo DB - connection error:'));
 Books = require('./models/books.js');
 
 
-//---->> SETUP SESSION PERSISTANCE <<-----
+//SETUP SESSION PERSISTANCE//
 
 app.use(session({
   secret: 'mySecretString',
   saveUninitialized: false,
   resave: false,
-  cookie: {maxAge: 1000 * 60 * 60 * 24 * 2}, 
+  cookie: {maxAge: 1000 * 60 * 60 * 24 * 2},
   store: new MongoStore({mongooseConnection: db, ttl: 2 * 24 * 60 * 60}) // 2 day in sec
 }))
 
+
+
+
+//END SESSION PERSISTANCE//
 
 //------->>POST BOOKS <<-------------
 app.post('/books', function(req, res){
@@ -102,6 +107,7 @@ app.put('/books/:_id', function(req, res){
 // END API
 
 
+// ADD APP LISTENER ON APISERVER PORT 3001
 app.listen(3001, function(err){
   if (err){
     return console.log(err);
