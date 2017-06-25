@@ -8414,11 +8414,19 @@ function updateCart(_id, unit, cart) {
   //stock in variable cartUpdate the cart updated at the specified index with methode .slice()with spread operator methode and append to it the newBookToUpdate
   var cartUpdate = [].concat(_toConsumableArray(curentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(curentBookToUpdate.slice(indexToUpdate + 1)));
 
-  return {
-    type: "UPDATE_CART",
-    payload: cartUpdate
-
+  return function (dispatch) {
+    _axios2.default.post('/api/cart', cartUpdate).then(function (response) {
+      dispatch({ type: "UPDATE_CART", payload: response.data });
+    }).catch(function (err) {
+      dispatch({ type: "UPDATE_REJECTED", payload: "Error when updated the cart" });
+    });
   };
+
+  // return {
+  //   type: "UPDATE_CART",
+  //   payload: cartUpdate
+  //
+  // }
 }
 
 /***/ }),

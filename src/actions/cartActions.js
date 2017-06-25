@@ -11,7 +11,6 @@ export function addToCart(cart){
       .catch(function(err){
         dispatch({type: "ADD_TO_CART_REJECTED", payload: "Error when adding to cart"})
       })
-
   }
   // return {
   //   type: "ADD_TO_CART",
@@ -52,10 +51,19 @@ export function updateCart(_id, unit, cart){
   //stock in variable cartUpdate the cart updated at the specified index with methode .slice()with spread operator methode and append to it the newBookToUpdate
   let cartUpdate = [...curentBookToUpdate.slice(0,indexToUpdate), newBookToUpdate, ...curentBookToUpdate.slice(indexToUpdate + 1)];
 
-
-  return {
-    type: "UPDATE_CART",
-    payload: cartUpdate
-
+  return function(dispatch){
+    axios.post('/api/cart', cartUpdate)
+      .then(function(response){
+        dispatch({type: "UPDATE_CART", payload: response.data})
+      })
+      .catch(function(err){
+        dispatch({type: "UPDATE_REJECTED", payload: "Error when updated the cart"})
+      })
   }
+
+  // return {
+  //   type: "UPDATE_CART",
+  //   payload: cartUpdate
+  //
+  // }
 }
