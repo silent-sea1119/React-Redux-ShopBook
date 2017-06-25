@@ -2,6 +2,11 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// for shoping cart session persistance
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -11,10 +16,28 @@ app.use(cookieParser());
 
 // STARTING OUR API
 
+// request mongoose and conection to mongoDB
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/bookshop'); // here we ask to connect our api with our database named bookshop if the database dont exsite mongoose ll create it automaticely
 
+// checking if the conection to mongodb succeded and add log the error if it faild...
+var db = mongoose.connection;
+db.on('error', console.err.bind(console, '#Mongo DB - connection error:'));
+
+// require the model with the schema
 Books = require('./models/books.js');
+
+
+//---->> SETUP SESSION PERSISTANCE <<-----
+
+app.use(session({
+  secret: 'mySecretString',
+  saveUninitialized: false,
+  resave: false,
+  cookie: {maxAge: 1000 * 60 * 60 * 24 * 2}, 
+  store: new MongoStore({mongooseConnection: db, ttl: 2 * 24 * 60 * 60}) // 2 day in sec
+}))
+
 
 //------->>POST BOOKS <<-------------
 app.post('/books', function(req, res){
