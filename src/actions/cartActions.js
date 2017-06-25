@@ -1,11 +1,22 @@
 "use strict"
+import axios from 'axios';
 
 // Action creator add to cart
-export function addToCart(book){
-  return {
-    type: "ADD_TO_CART",
-    payload: book
+export function addToCart(cart){
+  return function(dispatch){
+    axios.post('/api/cart', cart)
+      .then(function(response){
+        dispatch({type: "ADD_TO_CART", payload: response.data})
+      })
+      .catch(function(err){
+        dispatch({type: "ADD_TO_CART_REJECTED", payload: "Error when adding to cart"})
+      })
+
   }
+  // return {
+  //   type: "ADD_TO_CART",
+  //   payload: book
+  // }
 
 }
 

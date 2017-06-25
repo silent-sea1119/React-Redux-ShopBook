@@ -8352,8 +8352,6 @@ function updateBook(book) {
 "use strict";
 
 
-// Action creator add to cart
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -8364,13 +8362,27 @@ exports.addToCart = addToCart;
 exports.deleteCartItem = deleteCartItem;
 exports.updateCart = updateCart;
 
+var _axios = __webpack_require__(262);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function addToCart(book) {
-  return {
-    type: "ADD_TO_CART",
-    payload: book
+// Action creator add to cart
+function addToCart(cart) {
+  return function (dispatch) {
+    _axios2.default.post('/api/cart', cart).then(function (response) {
+      dispatch({ type: "ADD_TO_CART", payload: response.data });
+    }).catch(function (err) {
+      dispatch({ type: "ADD_TO_CART_REJECTED", payload: "Error when adding to cart" });
+    });
   };
+  // return {
+  //   type: "ADD_TO_CART",
+  //   payload: book
+  // }
 }
 
 // Action creator delete cart item

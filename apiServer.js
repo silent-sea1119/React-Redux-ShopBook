@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-///////////////////////
-// STARTING OUR API //
-/////////////////////
+/////////////////////////////
+// STARTING OUR APISERVER //
+///////////////////////////
 
 // request mongoose and conection to mongoDB
 var mongoose = require('mongoose');
@@ -23,12 +23,14 @@ mongoose.connect('mongodb://localhost:27017/bookshop'); // here we ask to connec
 
 // checking if the conection to mongodb succeded and add log the error if it faild...
 var db = mongoose.connection;
-db.on('error', console.err.bind(console, '#Mongo DB - connection error:'));
+db.on('error', console.error.bind(console, '#Mongo DB - connection error:'));
 
 // require the model with the schema
 Books = require('./models/books.js');
 
 
+
+/////////////////////////////
 //SETUP SESSION PERSISTANCE//
 
 app.use(session({
@@ -37,12 +39,34 @@ app.use(session({
   resave: false,
   cookie: {maxAge: 1000 * 60 * 60 * 24 * 2},
   store: new MongoStore({mongooseConnection: db, ttl: 2 * 24 * 60 * 60}) // 2 day in sec
-}))
+}));
 
+//----->> SAVE (POST) SESSION CART <<-------
 
+app.post('/cart', function(req, res){
+  var cart = req.body;
 
+  req.session.cart = cart;
+  req.session.save(function(err){
+    if (err){
+      throw err;
+    }
+    res.json(req.session.cart);
+  })
+});
+
+//------->> GET SESSION CART <<-----------
+
+app.get('/cart', function(req, res){
+  if(typeof req.session.cart !== 'undefined'){
+    res.json(req.session.cart);
+  }
+});
 
 //END SESSION PERSISTANCE//
+//////////////////////////
+
+
 
 //------->>POST BOOKS <<-------------
 app.post('/books', function(req, res){
@@ -113,4 +137,4 @@ app.listen(3001, function(err){
     return console.log(err);
   }
   console.log("API server is up and listening on port 3001");
-})
+});
