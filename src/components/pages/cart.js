@@ -3,10 +3,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {deleteCartItem, updateCart} from '../../actions/cartActions';
+import {deleteCartItem, updateCart, getCart} from '../../actions/cartActions';
 import {Modal, Button, ButtonGroup, Col, Row, Panel, Label} from'react-bootstrap';
 
 class Cart extends React.Component{
+
+  componentDidMount(){
+    this.props.getCart(); // dispatching the getcart action just after the component cart is mount.
+  }
 
   constructor(){
     super();
@@ -43,6 +47,7 @@ class Cart extends React.Component{
 
     this.props.deleteCartItem(cartAfterDelete);
   }
+
 
 
   onIncrement(_id){
@@ -145,7 +150,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     deleteCartItem: deleteCartItem,
-    updateCart: updateCart
+    updateCart: updateCart,
+    getCart: getCart
   }, dispatch);
 };
 
