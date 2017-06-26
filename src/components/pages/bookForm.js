@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {postBook, deleteBook} from '../../actions/bookActions';
-import {MenuItem, InputGroup, DropDownButton, Image, Col, Row, FormGroup, FormControl, Label, ControlLabel, Panel, Button, Well} from 'react-bootstrap';
+import {MenuItem, InputGroup, DropdownButton, Image, Col, Row, FormGroup, FormControl, Label, ControlLabel, Panel, Button, Well} from 'react-bootstrap';
 import {findDOMNode} from 'react-dom';
 import axios from 'axios';
 
@@ -47,29 +47,41 @@ onDelete(){
 
 }
 
+handleSelect(img){
+  this.setState({
+    img: '/images/'+ img
+  })
+}
+
   render(){
 
     const booksList = this.props.books.map(function(booksArr){
       return (
         <option key={booksArr._id}> {booksArr._id} </option>
       )
-    })
+    });
+
+    const imgList = this.state.images.map(function(imgArr, i){
+      return (
+        <MenuItem key={i} eventKey={imgArr.name} onClick={this.handleSelect.bind(this, imgArr.name)}>{imgArr.name}</MenuItem>
+      )
+    }, this)
 
     return(
       <Well>
         <Row>
-          <Col>
+          <Col xs={12} sm={6}>
             <Panel>
               <InputGroup>
-                <FormControl type="text" ref="image" value""/>
+                <FormControl type="text" ref="image" value={this.state.img}/>
                   <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon" title="Select an Image" bsStyle="primary">
                     {imgList}
                   </DropdownButton>
               </InputGroup>
-              <Image src="" responsive/>
-            </panel>
+              <Image src={this.state.img} responsive/>
+            </Panel>
           </Col>
-          <Col>
+          <Col xs={12} sm={6}>
             <Panel>
               <FormGroup controlId="title">
                 <p>Title  <input type="text" name="title" ref="title"></input></p>
