@@ -128,6 +128,33 @@ app.put('/books/:_id', function(req, res){
   })
 });
 
+
+/////////////////////////////
+// SET UP BOOKS IMAGE API //
+
+//------->> GET BOOK IMAGE <<--------
+app.get('/image/', function(req, res){
+  var imgFolder = __dirname + '/public/images/'; // we define the path of the folder where are store the images
+  var fs = require('fs'); // we require the FileSysteme
+  fs.readdir(imgFolder, function(err, files){
+    if(err){
+      throw err;
+    }
+    var filesArr = [];
+    files.forEach(function(file){
+      filesArr.push({name: file});
+    });
+    res.json(filesArr);
+  })
+
+})
+
+
+
+// END BOOKS IMAGE API //
+/////////////////////////
+
+
 // END API
 
 
