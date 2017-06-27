@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {postBook, deleteBook} from '../../actions/bookActions';
+import {postBook, deleteBook, getBooks} from '../../actions/bookActions';
 import {MenuItem, InputGroup, DropdownButton, Image, Col, Row, FormGroup, FormControl, Label, ControlLabel, Panel, Button, Well} from 'react-bootstrap';
 import {findDOMNode} from 'react-dom';
 import axios from 'axios';
@@ -20,8 +20,9 @@ constructor(){
 }
 
 componentDidMount(){
+  this.props.getBooks();
   //get image from api
-  axios.get('/api/image/')
+  axios.get('/api/images/')
     .then(function(response){
       this.setState({images: response.data});
     }.bind(this))
@@ -35,7 +36,8 @@ handleSubmit(){
   let book = [{
     title: this.refs.title.value,
     description: this.refs.description.value,
-    price: this.refs.price.value,
+    images: findDOMNode(this.refs.images).value,
+    price: this.refs.price.value
   }]
 
   this.props.postBook(book);
@@ -65,7 +67,7 @@ handleSelect(img){
       return (
         <MenuItem key={i} eventKey={imgArr.name} onClick={this.handleSelect.bind(this, imgArr.name)}>{imgArr.name}</MenuItem>
       )
-    }, this)
+    }, this);
 
     return(
       <Well>
@@ -118,7 +120,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     postBook,
-    deleteBook
+    deleteBook,
+    getBooks
   }, dispatch);
 }
 
