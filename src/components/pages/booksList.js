@@ -14,27 +14,7 @@ import {Well, Row, Col, Button, Grid} from 'react-bootstrap';
 class BooksList extends React.Component{
   componentDidMount(){
     // dispatch the action getBooks as soon as the component BookList is loaded
-    this.props.getBooks(
-      []
-      // [{
-      //   _id: 1,
-      //   title: "les 4 fantastique",
-      //   description: "Herge",
-      //   price: 29.5
-      // },
-      // {
-      //   _id: 2,
-      //   title: "La belle et la bete",
-      //   description: "Disney",
-      //   price: 18
-      // },
-      // {
-      //   _id: 3,
-      //   title: "Alladin",
-      //   description: "Disney",
-      //   price: 29.5
-      // },]
-    );
+    this.props.getBooks([]);
   }
 
   render(){

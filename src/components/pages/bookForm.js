@@ -22,7 +22,7 @@ constructor(){
 componentDidMount(){
   this.props.getBooks();
   //get image from api
-  axios.get('/api/images/')
+  axios.get('/api/images')
     .then(function(response){
       this.setState({images: response.data});
     }.bind(this))
@@ -75,7 +75,7 @@ handleSelect(img){
           <Col xs={12} sm={6}>
             <Panel>
               <InputGroup>
-                <FormControl type="text" ref="image" value={this.state.img}/>
+                <FormControl type="text" ref="images" value={this.state.img}/>
                   <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon" title="Select an Image" bsStyle="primary">
                     {imgList}
                   </DropdownButton>
@@ -104,7 +104,6 @@ handleSelect(img){
             </Panel>
           </Col>
         </Row>
-
     </Well>
     )
   }

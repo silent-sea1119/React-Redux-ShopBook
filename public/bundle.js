@@ -12755,7 +12755,7 @@ var BookForm = function (_React$Component) {
     value: function componentDidMount() {
       this.props.getBooks();
       //get image from api
-      _axios2.default.get('/api/images/').then(function (response) {
+      _axios2.default.get('/api/images').then(function (response) {
         this.setState({ images: response.data });
       }.bind(this)).catch(function (err) {
         this.setState({ images: 'error loading image from the apiServer', img: '' });
@@ -12823,7 +12823,7 @@ var BookForm = function (_React$Component) {
               _react2.default.createElement(
                 _reactBootstrap.InputGroup,
                 null,
-                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'image', value: this.state.img }),
+                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'images', value: this.state.img }),
                 _react2.default.createElement(
                   _reactBootstrap.DropdownButton,
                   { componentClass: _reactBootstrap.InputGroup.Button, id: 'input-dropdown-addon', title: 'Select an Image', bsStyle: 'primary' },
@@ -22657,26 +22657,7 @@ var BooksList = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // dispatch the action getBooks as soon as the component BookList is loaded
-      this.props.getBooks([]
-      // [{
-      //   _id: 1,
-      //   title: "les 4 fantastique",
-      //   description: "Herge",
-      //   price: 29.5
-      // },
-      // {
-      //   _id: 2,
-      //   title: "La belle et la bete",
-      //   description: "Disney",
-      //   price: 18
-      // },
-      // {
-      //   _id: 3,
-      //   title: "Alladin",
-      //   description: "Disney",
-      //   price: 29.5
-      // },]
-      );
+      this.props.getBooks([]);
     }
   }, {
     key: 'render',
