@@ -16,8 +16,8 @@ class Menu extends React.Component{
        </Navbar.Header>
        <Navbar.Collapse>
          <Nav>
-           <NavItem eventKey={1} href="/about">About</NavItem>
-           <NavItem eventKey={2} href="/contact">Contact</NavItem>
+           <NavItem eventKey={1} href="#">About</NavItem>
+           <NavItem eventKey={2} href="#">Contact</NavItem>
          </Nav>
          <Nav pullRight>
            <NavItem eventKey={1} href="/admin">Admin</NavItem>

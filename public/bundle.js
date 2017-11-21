@@ -23970,12 +23970,12 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 1, href: '/about' },
+              { eventKey: 1, href: '#' },
               'About'
             ),
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 2, href: '/contact' },
+              { eventKey: 2, href: '#' },
               'Contact'
             )
           ),
@@ -24076,16 +24076,13 @@ var BookItem = function (_React$Component) {
       /////////////////////////////////////////////////////
 
       // Checking if cart is empty or not by checking the length of the cart array
-
       if (this.props.cart.length > 0) {
         // the cart is not empty
         var _id = this.props._id;
-
         // we check if the _id of the book we addToCart is inside the cart array
         var cartIndex = this.props.cart.findIndex(function (cart) {
           return cart._id === _id;
         });
-
         if (cartIndex === -1) {
           // the index is not in the cart Array so we add the book to the cart
           this.props.addToCart(book);
