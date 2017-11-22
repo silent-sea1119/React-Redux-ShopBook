@@ -84,22 +84,31 @@ resetForm(){
         <Row>
           <Col xs={12} sm={6}>
             <Panel>
-              <InputGroup>
+              <FormGroup>
+                <ControlLabel>Select a book cover</ControlLabel>
                 <FormControl type="text" ref="images" value={this.state.img}/>
                   <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon" title="Select an Image" bsStyle="primary">
                     {imgList}
                   </DropdownButton>
-              </InputGroup>
+              </FormGroup>
               <Image src={this.state.img} responsive/>
             </Panel>
           </Col>
           <Col xs={12} sm={6}>
             <Panel>
               <FormGroup controlId="title">
-                <p>Title  <input type="text" name="title" ref="title"></input></p>
-                <p>Description  <input type="text" name="description" ref="description"></input></p>
-                <p>Price  <input type="text" name="price" ref="price"></input></p>
+                <ControlLabel>Title</ControlLabel>
+                <FormControl type="text" name="title" ref="title" placeholder='Enter the book title' />
               </FormGroup>
+              <FormGroup>
+                <ControlLabel>Description</ControlLabel>
+                <FormControl type="text" name="description" ref="description" placeholder='Enter the book description'/>
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>Price</ControlLabel>
+                <FormControl type="text" name="price" ref="price" placeholder='Enter the book price'/>
+              </FormGroup>
+
               <Button onClick={(!this.props.msg)?(this.handleSubmit.bind(this)):(this.resetForm.bind(this))} bsStyle={(!this.props.style)?("primary"):(this.props.style)}>{(!this.props.msg)?('Save book'):(this.props.msg)}</Button>
             </Panel>
             <Panel style={{marginTop:'25px'}}>

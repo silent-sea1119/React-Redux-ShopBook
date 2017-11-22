@@ -12839,8 +12839,13 @@ var BookForm = function (_React$Component) {
               _reactBootstrap.Panel,
               null,
               _react2.default.createElement(
-                _reactBootstrap.InputGroup,
+                _reactBootstrap.FormGroup,
                 null,
+                _react2.default.createElement(
+                  _reactBootstrap.ControlLabel,
+                  null,
+                  'Select a book cover'
+                ),
                 _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'images', value: this.state.img }),
                 _react2.default.createElement(
                   _reactBootstrap.DropdownButton,
@@ -12861,23 +12866,31 @@ var BookForm = function (_React$Component) {
                 _reactBootstrap.FormGroup,
                 { controlId: 'title' },
                 _react2.default.createElement(
-                  'p',
+                  _reactBootstrap.ControlLabel,
                   null,
-                  'Title  ',
-                  _react2.default.createElement('input', { type: 'text', name: 'title', ref: 'title' })
+                  'Title'
                 ),
+                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', name: 'title', ref: 'title', placeholder: 'Enter the book title' })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.FormGroup,
+                null,
                 _react2.default.createElement(
-                  'p',
+                  _reactBootstrap.ControlLabel,
                   null,
-                  'Description  ',
-                  _react2.default.createElement('input', { type: 'text', name: 'description', ref: 'description' })
+                  'Description'
                 ),
+                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', name: 'description', ref: 'description', placeholder: 'Enter the book description' })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.FormGroup,
+                null,
                 _react2.default.createElement(
-                  'p',
+                  _reactBootstrap.ControlLabel,
                   null,
-                  'Price  ',
-                  _react2.default.createElement('input', { type: 'text', name: 'price', ref: 'price' })
-                )
+                  'Price'
+                ),
+                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', name: 'price', ref: 'price', placeholder: 'Enter the book price' })
               ),
               _react2.default.createElement(
                 _reactBootstrap.Button,
