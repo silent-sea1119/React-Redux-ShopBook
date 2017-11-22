@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {postBook, deleteBook, getBooks} from '../../actions/bookActions';
+import {postBook, deleteBook, getBooks, resetButton} from '../../actions/bookActions';
 import {MenuItem, InputGroup, DropdownButton, Image, Col, Row, FormGroup, FormControl, Label, ControlLabel, Panel, Button, Well} from 'react-bootstrap';
 import {findDOMNode} from 'react-dom';
 import axios from 'axios';
@@ -55,6 +55,16 @@ handleSelect(img){
   })
 }
 
+resetForm(){
+  // dispatch the action resetButton
+  this.props.resetButton();
+  this.refs.title.value='';
+  this.refs.description.value='';
+  this.setState({img:''});
+  this.refs.price.value='';
+
+}
+
   render(){
 
     const booksList = this.props.books.map(function(booksArr){
@@ -90,7 +100,7 @@ handleSelect(img){
                 <p>Description  <input type="text" name="description" ref="description"></input></p>
                 <p>Price  <input type="text" name="price" ref="price"></input></p>
               </FormGroup>
-              <Button onClick={this.handleSubmit.bind(this)} bsStyle="success">Save</Button>
+              <Button onClick={(!this.props.msg)?(this.handleSubmit.bind(this)):(this.resetForm.bind(this))} bsStyle={(!this.props.style)?("primary"):(this.props.style)}>{(!this.props.msg)?('Save book'):(this.props.msg)}</Button>
             </Panel>
             <Panel style={{marginTop:'25px'}}>
               <FormGroup controlId="formControlsSelect">
@@ -111,7 +121,9 @@ handleSelect(img){
 
 function mapStateToProps(state){
   return {
-    books: state.books.books
+    books: state.books.books,
+    msg: state.books.msg,
+    style: state.books.style
   }
 }
 
@@ -120,7 +132,8 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
     postBook,
     deleteBook,
-    getBooks
+    getBooks,
+    resetButton
   }, dispatch);
 }
 
