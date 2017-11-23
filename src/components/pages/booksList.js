@@ -67,7 +67,7 @@ class BooksList extends React.Component{
         </row>
 
 
-        <Row style={{marginTop: '20px'}}>
+        <Row style={{marginTop: '20px', marginBottom: '150px'}}>
           {booksList}
         </Row>
 

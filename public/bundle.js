@@ -12829,7 +12829,7 @@ var BookForm = function (_React$Component) {
 
       return _react2.default.createElement(
         _reactBootstrap.Well,
-        null,
+        { style: { marginBottom: '150px' } },
         _react2.default.createElement(
           _reactBootstrap.Row,
           null,
@@ -13149,7 +13149,7 @@ var Cart = function (_React$Component) {
 
       return _react2.default.createElement(
         _reactBootstrap.Panel,
-        { header: 'Cart', bsStyle: 'primary' },
+        { header: 'Cart', bsStyle: 'primary', style: { marginBottom: '100px' } },
         _react2.default.createElement(
           'h3',
           null,
@@ -13170,7 +13170,8 @@ var Cart = function (_React$Component) {
                 'strong',
                 null,
                 this.props.totalAmount
-              )
+              ),
+              ' CHF'
             ),
             _react2.default.createElement(
               _reactBootstrap.Button,
@@ -13222,7 +13223,7 @@ var Cart = function (_React$Component) {
                     null,
                     this.props.totalAmount
                   ),
-                  '.- '
+                  '.- CHF '
                 ),
                 _react2.default.createElement(
                   _reactBootstrap.Button,
@@ -22813,7 +22814,7 @@ var BooksList = function (_React$Component) {
         ),
         _react2.default.createElement(
           _reactBootstrap.Row,
-          { style: { marginTop: '20px' } },
+          { style: { marginTop: '20px', marginBottom: '150px' } },
           booksList
         )
       );

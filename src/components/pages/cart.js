@@ -102,12 +102,12 @@ class Cart extends React.Component{
     }, this)
 
     return (
-      <Panel header="Cart" bsStyle="primary">
+      <Panel header="Cart" bsStyle="primary" style={{marginBottom: '100px'}}>
       <h3> Shoping Cart </h3>
         {cartItemList}
-        <Row>
+        <Row >
           <Col xs={12}>
-          <h5>Total Amount: <strong>{this.props.totalAmount}</strong></h5>
+          <h5>Total Amount: <strong>{this.props.totalAmount}</strong> CHF</h5>
           <Button onClick={this.open.bind(this)} bsStyle="success" bsSize="small">PROCEED TO CHECKOUT</Button>
             <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
               <Modal.Header closeButton>
@@ -119,7 +119,7 @@ class Cart extends React.Component{
               </Modal.Body>
               <Modal.Footer>
                 <h4> Nbr of Product: {this.props.totalQty} </h4>
-                <h4> Total CHF: <strong>{this.props.totalAmount}</strong>.- </h4>
+                <h4> Total CHF: <strong>{this.props.totalAmount}</strong>.- CHF </h4>
                 <Button onClick={this.close.bind(this)}>Close</Button>
               </Modal.Footer>
             </Modal>

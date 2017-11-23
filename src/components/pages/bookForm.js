@@ -81,8 +81,8 @@ resetForm(){
     }, this);
 
     return(
-      <Well>
-        <Row>
+      <Well style={{marginBottom: '150px'}}>
+        <Row >
           <Col xs={12} sm={6}>
             <Panel>
               <FormGroup>
