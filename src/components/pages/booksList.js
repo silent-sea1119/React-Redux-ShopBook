@@ -7,7 +7,7 @@ import {getBooks} from '../../actions/bookActions';
 import BookItem from './bookItem';
 import BookForm from './bookForm';
 import Cart from './cart';
-import {Well, Row, Col, Button, Grid} from 'react-bootstrap';
+import {Well, Row, Col, Button, Grid, Carousel} from 'react-bootstrap';
 
 
 
@@ -34,12 +34,42 @@ class BooksList extends React.Component{
 
     return(
       <Grid>
+
         <Row>
           <Cart />
         </Row>
-        <Row>
+
+        <row>
+          <Carousel>
+            <Carousel.Item>
+              <img width={1000} height={300} alt="900x300" src="/images/slide1.jpg" />
+              <Carousel.Caption>
+                <h2>Discovery Book</h2>
+                <p>Add your book in your cart to proceed.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img width={1000} height={300} alt="900x300" src="/images/slide2.jpg" />
+              <Carousel.Caption>
+                <h2>Welcome in The Matrix</h2>
+                <p>Add your book in your cart to proceed.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img width={1000} height={300} alt="900x300" src="/images/slide3.jpg" />
+              <Carousel.Caption>
+                <h2>Follow the white rabbit</h2>
+                <p>Add your book in your cart to proceed.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+
+        </row>
+
+        <Row style={{marginTop: '20px'}}>
           {booksList}
         </Row>
+
       </Grid>
     )
   }

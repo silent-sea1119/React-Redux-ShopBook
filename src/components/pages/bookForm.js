@@ -94,21 +94,21 @@ resetForm(){
               <Image src={this.state.img} responsive/>
             </Panel>
           </Col>
+
           <Col xs={12} sm={6}>
             <Panel>
-              <FormGroup controlId="title">
+              <FormGroup controlId="title" validationState={this.props.validation}>
                 <ControlLabel>Title</ControlLabel>
-                <FormControl type="text" name="title" ref="title" placeholder='Enter the book title' />
+                <FormControl type="text" name="title" ref="title" placeholder='Enter the book title' /><FormControl.Feedback/>
               </FormGroup>
-              <FormGroup>
+              <FormGroup controlId="description" validationState={this.props.validation}>
                 <ControlLabel>Description</ControlLabel>
-                <FormControl type="text" name="description" ref="description" placeholder='Enter the book description'/>
+                <FormControl type="text" name="description" ref="description" placeholder='Enter the book description'/><FormControl.Feedback/>
               </FormGroup>
-              <FormGroup>
+              <FormGroup controlId="price" validationState={this.props.validation}>
                 <ControlLabel>Price</ControlLabel>
-                <FormControl type="text" name="price" ref="price" placeholder='Enter the book price'/>
+                <FormControl type="text" name="price" ref="price" placeholder='Enter the book price'/><FormControl.Feedback/>
               </FormGroup>
-
               <Button onClick={(!this.props.msg)?(this.handleSubmit.bind(this)):(this.resetForm.bind(this))} bsStyle={(!this.props.style)?("primary"):(this.props.style)}>{(!this.props.msg)?('Save book'):(this.props.msg)}</Button>
             </Panel>
             <Panel style={{marginTop:'25px'}}>
@@ -122,6 +122,7 @@ resetForm(){
               <Button onClick={this.onDelete.bind(this)} bsStyle="danger">Delete Book</Button>
             </Panel>
           </Col>
+
         </Row>
     </Well>
     )
@@ -132,7 +133,8 @@ function mapStateToProps(state){
   return {
     books: state.books.books,
     msg: state.books.msg,
-    style: state.books.style
+    style: state.books.style,
+    validation: state.books.validation
   }
 }
 

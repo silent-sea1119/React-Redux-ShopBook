@@ -21,7 +21,7 @@ const bookReducers = function(state={books:[]}, action){
 
     case "POST_BOOK":
     //using babel preset stage-1 spread operator notation we can also write
-    return {...state, books: [...state.books, ...action.payload], msg:'Book saved! Click to continue', style:'success'} // wich concat the 2 array on the flight in the object
+    return {...state, books: [...state.books, ...action.payload], msg:'Book saved! Click to continue', style:'success', validation: 'success'} // wich concat the 2 array on the flight in the object
 
     // Using standard
     // let books = state.books.concat(action.payload);
@@ -31,13 +31,13 @@ const bookReducers = function(state={books:[]}, action){
 
     case "POST_BOOK_REJECTED":
     // Will return a message in case an error occur when saving a new book
-    return {...state, msg:'Please, try again', style:'danger'}
+    return {...state, msg:'Please, try again', style:'danger', validation:'error'}
     break;
 
 
     case "RESET_BUTTON":
     // Will reset the form
-    return {...state, msg: null, style:'primary'}
+    return {...state, msg: null, style:'primary', validation: null}
     break;
 
 
