@@ -153,6 +153,6 @@ function mapDispatchToProps(dispatch){
     updateCart: updateCart,
     getCart: getCart
   }, dispatch);
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -112,6 +112,7 @@ resetForm(){
               </FormGroup>
               <Button onClick={(!this.props.msg)?(this.handleSubmit.bind(this)):(this.resetForm.bind(this))} bsStyle={(!this.props.style)?("primary"):(this.props.style)}>{(!this.props.msg)?('Save book'):(this.props.msg)}</Button>
             </Panel>
+
             <Panel style={{marginTop:'25px'}}>
               <FormGroup controlId="formControlsSelect">
                 <ControlLabel>Select a book id to delete</ControlLabel>
