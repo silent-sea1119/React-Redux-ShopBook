@@ -49,7 +49,7 @@ app.post('/cart', function(req, res){
   req.session.cart = cart;
   req.session.save(function(err){
     if (err){
-      throw err;
+      console.log(err);
     }
     res.json(req.session.cart);
   })
@@ -74,7 +74,7 @@ app.post('/books', function(req, res){
 
   Books.create(book, function(err, books){
     if (err){
-      throw err;
+      console.log(err);
     }
     res.json(books);
   })
@@ -85,7 +85,7 @@ app.post('/books', function(req, res){
 app.get('/books',function(req, res){
   Books.find(function(err, books){
     if (err){
-      throw err;
+      console.log(err);
     }
     res.json(books);
   })
@@ -98,7 +98,7 @@ app.delete('/books/:_id', function(req, res){
 
   Books.remove(query, function(err, books){
     if (err){
-      throw err;
+      console.log(err);
     }
     res.json(books);
   })
@@ -122,7 +122,7 @@ app.put('/books/:_id', function(req, res){
 
   Books.findOneAndUpdate(query, update, options, function(err, books){
     if (err){
-      throw err;
+      console.log(err);
     }
     res.json(books);
   })
@@ -138,7 +138,7 @@ app.get('/images/', function(req, res){
   var fs = require('fs'); // we require the FileSysteme
   fs.readdir(imgFolder, function(err, files){
     if(err){
-      throw err;
+      console.log(err);
     }
     var filesArr = [];
     files.forEach(function(file){
@@ -154,9 +154,9 @@ app.get('/images/', function(req, res){
 // END BOOKS IMAGE API //
 /////////////////////////
 
-
-// END API
-
+////////////////
+//  END API  //
+//////////////
 
 // ADD APP LISTENER ON APISERVER PORT 3001
 app.listen(3001, function(err){
