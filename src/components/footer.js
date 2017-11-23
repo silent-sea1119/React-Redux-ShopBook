@@ -7,7 +7,7 @@ class Footer extends React.Component{
     return(
       <footer className="footer text-center">
         <div className="container">
-          <p> Copyright © My Book App 2017 All Right Reserverd</p>
+          <p> ShopingCart App With React, Redux, Node JS, Mongo DB, and Bootstrap | Copyright 2017 © ShopBook App by Rundev97 </p>
         </div>
       </footer>
 

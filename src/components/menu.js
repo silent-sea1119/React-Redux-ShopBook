@@ -10,7 +10,7 @@ class Menu extends React.Component{
       <Navbar inverse>
        <Navbar.Header>
          <Navbar.Brand>
-           <a href="/">My Books App</a>
+           <a href="/">ShopBook App</a>
          </Navbar.Brand>
          <Navbar.Toggle />
        </Navbar.Header>

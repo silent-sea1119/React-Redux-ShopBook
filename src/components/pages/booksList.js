@@ -35,6 +35,7 @@ class BooksList extends React.Component{
     return(
       <Grid>
 
+
         <Row>
           <Cart />
         </Row>
@@ -63,8 +64,8 @@ class BooksList extends React.Component{
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
-
         </row>
+
 
         <Row style={{marginTop: '20px'}}>
           {booksList}

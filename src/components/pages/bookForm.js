@@ -33,11 +33,11 @@ componentDidMount(){
 }
 
 handleSubmit(){
-  let book = [{
-    title: this.refs.title.value,
-    description: this.refs.description.value,
+  const book = [{
+    title: findDOMNode(this.refs.title).value,
+    description: findDOMNode(this.refs.description).value,
     images: findDOMNode(this.refs.images).value,
-    price: this.refs.price.value
+    price: findDOMNode(this.refs.price).value
   }]
 
   this.props.postBook(book);
@@ -58,6 +58,7 @@ handleSelect(img){
 resetForm(){
   // dispatch the action resetButton
   this.props.resetButton();
+
   this.refs.title.value='';
   this.refs.description.value='';
   this.setState({img:''});

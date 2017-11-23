@@ -12773,10 +12773,10 @@ var BookForm = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit() {
       var book = [{
-        title: this.refs.title.value,
-        description: this.refs.description.value,
+        title: (0, _reactDom.findDOMNode)(this.refs.title).value,
+        description: (0, _reactDom.findDOMNode)(this.refs.description).value,
         images: (0, _reactDom.findDOMNode)(this.refs.images).value,
-        price: this.refs.price.value
+        price: (0, _reactDom.findDOMNode)(this.refs.price).value
       }];
 
       this.props.postBook(book);
@@ -12799,6 +12799,7 @@ var BookForm = function (_React$Component) {
     value: function resetForm() {
       // dispatch the action resetButton
       this.props.resetButton();
+
       this.refs.title.value = '';
       this.refs.description.value = '';
       this.setState({ img: '' });
@@ -23995,7 +23996,7 @@ var Footer = function (_React$Component) {
           _react2.default.createElement(
             "p",
             null,
-            " Copyright \xA9 My Book App 2017 All Right Reserverd"
+            " ShopingCart App With React, Redux, Node JS, Mongo DB, and Bootstrap | Copyright 2017 \xA9 ShopBook App by Rundev97 "
           )
         )
       );
@@ -24060,7 +24061,7 @@ var Menu = function (_React$Component) {
             _react2.default.createElement(
               'a',
               { href: '/' },
-              'My Books App'
+              'ShopBook App'
             )
           ),
           _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
