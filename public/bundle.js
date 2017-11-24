@@ -51430,6 +51430,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(68);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51454,26 +51456,75 @@ var Contact = function (_Component) {
         'div',
         { className: 'container', style: { marginBottom: '100px' } },
         _react2.default.createElement(
-          'h3',
+          _reactBootstrap.Row,
           null,
-          ' Contact Page '
-        ),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(
-          'h4',
-          null,
-          'Contact Information'
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum tortor ut felis pretium rhoncus. Nulla egestas felis urna, eu sagittis mi malesuada et. Morbi malesuada mollis semperLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum tortor ut felis pretium rhoncus..'
-        ),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(
-          'h4',
-          null,
-          'Formulaire'
+          _react2.default.createElement(
+            'h3',
+            null,
+            ' Contact Us'
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            _reactBootstrap.Col,
+            { xs: 12, sm: 12 },
+            _react2.default.createElement(
+              'h4',
+              null,
+              'Information'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum tortor ut felis pretium rhoncus. Nulla egestas felis urna, eu sagittis mi malesuada et. Morbi malesuada mollis semperLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum tortor ut felis..'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Col,
+            { xs: 12, sm: 6 },
+            _react2.default.createElement(
+              'h4',
+              null,
+              'Formulaire'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.ControlLabel,
+                null,
+                'Name'
+              ),
+              _react2.default.createElement(_reactBootstrap.FormControl, { placeholder: 'Enter your name' }),
+              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null)
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.ControlLabel,
+                null,
+                'Email'
+              ),
+              _react2.default.createElement(_reactBootstrap.FormControl, { placeholder: 'Enter your email adress' }),
+              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null)
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.ControlLabel,
+                null,
+                'Message'
+              ),
+              _react2.default.createElement(_reactBootstrap.FormControl, { placeholder: 'Enter your message' }),
+              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null)
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { bsStyle: 'primary' },
+              ' Envoyer '
+            )
+          )
         )
       );
     }
