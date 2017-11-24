@@ -20,14 +20,16 @@ app.use(cookieParser());
 // request mongoose and conection to mongoDB
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/bookshop'); // here we ask to connect our api with our database named bookshop if the database dont exsite mongoose ll create it automaticely
-mongoose.connect('mongodb://rundev974:Password@ds137435.mlab.com:37435/shopbookdb');
+
+var url = (process.env.DATABASEURL || 'mongodb://localhost:27017/bookshop' );
+mongoose.connect(url);
 
 // checking if the conection to mongodb succeded and add log the error if it faild...
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, '#Mongo DB - connection error:'));
 
 // require the model with the schema
-var Books = require('./models/books');
+var Books = require('./models/books.js');
 
 
 
