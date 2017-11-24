@@ -29,7 +29,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, '#Mongo DB - connection error:'));
 
 // require the model with the schema
-Books = require('./models/books');
+Books = require('./models/Books');
 
 
 
