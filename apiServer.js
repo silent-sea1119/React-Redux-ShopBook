@@ -1,6 +1,8 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// require the model with the schema
+var Books = require('./models/books');
 
 // for shoping cart session persistance
 const session = require('express-session');
@@ -28,8 +30,7 @@ mongoose.connect(url);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, '#Mongo DB - connection error:'));
 
-// require the model with the schema
-Books = require('./models/Books');
+
 
 
 
