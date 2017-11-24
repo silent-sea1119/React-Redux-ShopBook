@@ -148,11 +148,9 @@ app.get('/images/', function(req, res){
   })
 
 })
-
-
-
 // END BOOKS IMAGE API //
 /////////////////////////
+
 
 ////////////////
 //  END API  //

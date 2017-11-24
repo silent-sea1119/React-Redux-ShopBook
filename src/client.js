@@ -14,6 +14,8 @@ import BooksForm from './components/pages/bookForm';
 import Cart from './components/pages/cart';
 import {Router, Route, browserHistory, IndexRoute } from 'react-router';
 import thunk from 'redux-thunk';
+import About from './components/pages/about';
+import Contact from './components/pages/contact';
 
 
 
@@ -40,8 +42,8 @@ const Routes = (
         <IndexRoute component={BooksList}/>
         <Route path="/admin" component={BooksForm}/>
         <Route path="/cart" component={Cart}/>
-        <Route path="/about" component={Cart}/>
-        <Route path="/contact" component={Cart}/>
+        <Route path="/about" component={About}/>
+        <Route path="/contact" component={Contact}/>
       </Route>
     </Router>
   </Provider>

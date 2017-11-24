@@ -23884,6 +23884,14 @@ var _reduxThunk = __webpack_require__(262);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
+var _about = __webpack_require__(571);
+
+var _about2 = _interopRequireDefault(_about);
+
+var _contact = __webpack_require__(572);
+
+var _contact2 = _interopRequireDefault(_contact);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //////////////////////////////
@@ -23910,8 +23918,8 @@ var Routes = _react2.default.createElement(
       _react2.default.createElement(_reactRouter.IndexRoute, { component: _booksList2.default }),
       _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _bookForm2.default }),
       _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _cart2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _cart2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _cart2.default })
+      _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _about2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _contact2.default })
     )
   )
 );
@@ -24098,12 +24106,12 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 1, href: '#' },
+              { eventKey: 1, href: '/about' },
               'About'
             ),
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 2, href: '#' },
+              { eventKey: 2, href: '/contact' },
               'Contact'
             )
           ),
@@ -51317,6 +51325,164 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 571 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var About = function (_Component) {
+  _inherits(About, _Component);
+
+  function About() {
+    _classCallCheck(this, About);
+
+    return _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).apply(this, arguments));
+  }
+
+  _createClass(About, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'container', style: { marginBottom: '100px' } },
+        _react2.default.createElement(
+          'h3',
+          null,
+          ' About Page '
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'First Paragraph'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum tortor ut felis pretium rhoncus. Nulla egestas felis urna, eu sagittis mi malesuada et. Morbi malesuada mollis semper. Quisque tempus, ligula id egestas ultricies, augue leo molestie tortor, a porta nunc dolor eget urna. Nunc dictum congue lectus vel gravida. Duis mollis, massa nec mollis consequat, velit libero ullamcorper urna, id vulputate erat urna sed mauris. Phasellus at porttitor nibh. Praesent varius accumsan gravida. Sed luctus tincidunt sapien, et congue tellus ornare eget. Nulla aliquam est at felis tempor, id congue felis placerat. Fusce fringilla, risus vitae auctor cursus, nisl mauris aliquet nulla, eu sodales ante nulla ac odio. Mauris malesuada, augue lacinia tempus condimentum, enim eros scelerisque enim, id placerat nisl magna at velit.'
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Second Paragraph'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Quisque maximus ipsum lectus, ullamcorper blandit neque viverra eu. In porta orci quis hendrerit rhoncus. Suspendisse vestibulum quis odio ac pretium. Sed elementum auctor sapien a posuere. Donec turpis augue, lacinia ac massa sit amet, dictum congue mi. Vivamus risus dolor, fringilla ac est in, convallis dapibus quam. Nulla facilisi. Ut a nibh sapien. Morbi ultrices leo elit, nec mattis nisi pellentesque vitae. In sed lectus ex. Donec nisl sem, bibendum sit amet eleifend in, malesuada sit amet sapien. Fusce tristique metus quis dui condimentum porta. Donec viverra tortor eu justo maximus, sed sollicitudin diam ultricies. Curabitur tempor, lacus at faucibus sodales, elit nisl porta libero, ac interdum turpis orci vitae arcu. Quisque fermentum eget mi nec vestibulum. Phasellus aliquam diam est, quis fringilla tortor porta in.'
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Third Paragraph'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Nulla aliquet purus a libero elementum aliquet. Ut ut vulputate quam. Proin ut quam egestas, cursus augue sed, blandit arcu. Donec pellentesque tincidunt massa mattis aliquet. In feugiat ante ante, in dictum dui auctor pellentesque. Duis consectetur, leo quis rhoncus malesuada, risus elit convallis lorem, quis iaculis quam mi sed leo.  amet consectetur odio nunc nec ante. Donec imperdiet libero mi, eu tristique nisi semper nec. Vestibulum pretium, risus in pellentesque congue, sem'
+        )
+      );
+    }
+  }]);
+
+  return About;
+}(_react.Component);
+
+exports.default = About;
+
+/***/ }),
+/* 572 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Contact = function (_Component) {
+  _inherits(Contact, _Component);
+
+  function Contact() {
+    _classCallCheck(this, Contact);
+
+    return _possibleConstructorReturn(this, (Contact.__proto__ || Object.getPrototypeOf(Contact)).apply(this, arguments));
+  }
+
+  _createClass(Contact, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'container', style: { marginBottom: '100px' } },
+        _react2.default.createElement(
+          'h3',
+          null,
+          ' Contact Page '
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Contact Information'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum tortor ut felis pretium rhoncus. Nulla egestas felis urna, eu sagittis mi malesuada et. Morbi malesuada mollis semperLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum tortor ut felis pretium rhoncus..'
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Formulaire'
+        )
+      );
+    }
+  }]);
+
+  return Contact;
+}(_react.Component);
+
+exports.default = Contact;
 
 /***/ })
 /******/ ]);
