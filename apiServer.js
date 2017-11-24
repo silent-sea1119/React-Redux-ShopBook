@@ -2,7 +2,7 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // require the model with the schema
-var Books = require('./models/books');
+var Books = require('/models/books');
 
 // for shoping cart session persistance
 const session = require('express-session');
