@@ -13148,87 +13148,91 @@ var Cart = function (_React$Component) {
       }, this);
 
       return _react2.default.createElement(
-        _reactBootstrap.Panel,
-        { header: 'Cart', bsStyle: 'primary', style: { marginBottom: '100px' } },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
-          'h3',
-          null,
-          ' Shoping Cart '
-        ),
-        cartItemList,
-        _react2.default.createElement(
-          _reactBootstrap.Row,
-          null,
+          _reactBootstrap.Panel,
+          { header: 'Cart', bsStyle: 'primary', style: { marginBottom: '100px' } },
           _react2.default.createElement(
-            _reactBootstrap.Col,
-            { xs: 12 },
+            'h3',
+            null,
+            ' Shoping Cart '
+          ),
+          cartItemList,
+          _react2.default.createElement(
+            _reactBootstrap.Row,
+            null,
             _react2.default.createElement(
-              'h5',
-              null,
-              'Total Amount: ',
+              _reactBootstrap.Col,
+              { xs: 12 },
               _react2.default.createElement(
-                'strong',
+                'h5',
                 null,
-                this.props.totalAmount
-              ),
-              ' CHF'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              { onClick: this.open.bind(this), bsStyle: 'success', bsSize: 'small' },
-              'PROCEED TO CHECKOUT'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal,
-              { show: this.state.showModal, onHide: this.close.bind(this) },
-              _react2.default.createElement(
-                _reactBootstrap.Modal.Header,
-                { closeButton: true },
+                'Total Amount: ',
                 _react2.default.createElement(
-                  _reactBootstrap.Modal.Title,
+                  'strong',
                   null,
-                  'Thank You!'
-                )
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Modal.Body,
-                null,
-                _react2.default.createElement(
-                  'h4',
-                  null,
-                  'Your order has been saved!'
+                  this.props.totalAmount
                 ),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  'You ll receive an email confirmation'
-                )
+                ' CHF'
               ),
               _react2.default.createElement(
-                _reactBootstrap.Modal.Footer,
-                null,
+                _reactBootstrap.Button,
+                { onClick: this.open.bind(this), bsStyle: 'success', bsSize: 'small' },
+                'PROCEED TO CHECKOUT'
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Modal,
+                { show: this.state.showModal, onHide: this.close.bind(this) },
                 _react2.default.createElement(
-                  'h4',
-                  null,
-                  ' Nbr of Product: ',
-                  this.props.totalQty,
-                  ' '
-                ),
-                _react2.default.createElement(
-                  'h4',
-                  null,
-                  ' Total CHF: ',
+                  _reactBootstrap.Modal.Header,
+                  { closeButton: true },
                   _react2.default.createElement(
-                    'strong',
+                    _reactBootstrap.Modal.Title,
                     null,
-                    this.props.totalAmount
-                  ),
-                  '.- CHF '
+                    'Thank You!'
+                  )
                 ),
                 _react2.default.createElement(
-                  _reactBootstrap.Button,
-                  { onClick: this.close.bind(this) },
-                  'Close'
+                  _reactBootstrap.Modal.Body,
+                  null,
+                  _react2.default.createElement(
+                    'h4',
+                    null,
+                    'Your order has been saved!'
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    'You ll receive an email confirmation'
+                  )
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Modal.Footer,
+                  null,
+                  _react2.default.createElement(
+                    'h4',
+                    null,
+                    ' Nbr of Product: ',
+                    this.props.totalQty,
+                    ' '
+                  ),
+                  _react2.default.createElement(
+                    'h4',
+                    null,
+                    ' Total CHF: ',
+                    _react2.default.createElement(
+                      'strong',
+                      null,
+                      this.props.totalAmount
+                    ),
+                    '.- CHF '
+                  ),
+                  _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    { onClick: this.close.bind(this) },
+                    'Close'
+                  )
                 )
               )
             )

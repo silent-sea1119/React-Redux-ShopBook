@@ -78,6 +78,7 @@ class Cart extends React.Component{
 
     let cartItemList = this.props.cart.map(function(cartItem){
       return(
+
         <Panel key={cartItem._id}>
           <Row>
             <Col xs={12} sm={4}>
@@ -102,6 +103,7 @@ class Cart extends React.Component{
     }, this)
 
     return (
+      <div className='container'>
       <Panel header="Cart" bsStyle="primary" style={{marginBottom: '100px'}}>
       <h3> Shoping Cart </h3>
         {cartItemList}
@@ -126,6 +128,8 @@ class Cart extends React.Component{
           </Col>
         </Row>
       </Panel>
+      </div>
+
     )
   }
 
